@@ -1,8 +1,53 @@
 <script>
     import { onMount } from "svelte";
-    import { RCodeEdytor } from "../classes/r_code_edytor.js";
     
+    /* USAGE 
+        <!-- R Code Editor -->
+        <CodeEdytor 
+            editorClass={RCodeEdytor}
+            initialCode="" 
+        />
+
+        <!-- Python Code Editor (future) -->
+        <CodeEdytor 
+            editorClass={PythonCodeEdytor}
+            initialCode="" 
+        />
+
+        <!-- Custom dimensions -->
+        <CodeEdytor 
+            editorClass={RCodeEdytor}
+            initialCode="" 
+            width="800px"
+            height="400px"
+            maxHeight="600px"
+            minHeight="300px"
+        />
+
+        <!-- Responsive design -->
+        <CodeEdytor 
+            editorClass={RCodeEdytor}
+            initialCode="" 
+            width="100%"
+            maxWidth="1200px"
+            height="50vh"
+        />
+    */
+
+    export let editorClass; // The editor class to instantiate (RCodeEdytor, PythonCodeEdytor, etc.)
     export let initialCode = "";
+    // svelte-ignore export_let_unused
+    export let width = "100%";
+    // svelte-ignore export_let_unused
+    export let height = "200px";
+    // svelte-ignore export_let_unused
+    export let minHeight = "200px";
+    // svelte-ignore export_let_unused
+    export let maxHeight = "200px";
+    // svelte-ignore export_let_unused
+    export let maxWidth = "100%";
+    // svelte-ignore export_let_unused
+    export let minWidth = "300px";
     
     let editor;
     let codeEditor;
@@ -33,40 +78,100 @@
             .replace(/'/g, '&#039;');
     }
     
-    function generateStyledContent(code, completions, showGhost, cursorPos, completionIdx) {
+    function generateStyledContent(code, completions, showGhost, cursorPos, completionIndex) {
+        let content = code;
+        
+        // Apply keyword highlighting first
+        if (editor && editor.getKeywords) {
+            const keywords = editor.getKeywords();
+            
+            // Sort keywords by length (longest first) to avoid partial matches
+            keywords.sort((a, b) => b.length - a.length);
+            
+            keywords.forEach(keyword => {
+                // Use word boundaries to match whole words only
+                const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+                content = content.replace(regex, `<span class="keyword">${keyword}</span>`);
+            });
+        }
+        
+        // Convert tabs and newlines for HTML display
+        content = content.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+        
         if (!showGhost || completions.length === 0) {
-            // Convert tabs to 4 spaces and newlines to <br> for the main content
-            return escapeHtml(code).replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+            return content;
         }
         
+        // Add ghost text with completion cycling
         const textIndex = editor ? editor.positionToTextIndex(code, cursorPos.row, cursorPos.column) : 0;
-        const completion = completions[completionIdx] || completions[0];
         
-        // Calculate how much to trim for ghost text (same logic as insertCompletion)
-        let charactersToDelete = 0;
-        if (completion.type === 'snippet' && completion.replaceLength !== undefined) {
-            charactersToDelete = completion.replaceLength;
+        // Calculate how much of the original content to replace for ghost text positioning
+        // We need to account for the HTML tags we've added for keywords
+        const beforeCursor = code.substring(0, textIndex);
+        const afterCursor = code.substring(textIndex);
+        
+        // Apply keyword highlighting to the parts separately
+        let styledBefore = beforeCursor;
+        let styledAfter = afterCursor;
+        
+        if (editor && editor.getKeywords) {
+            const keywords = editor.getKeywords();
+            keywords.sort((a, b) => b.length - a.length);
+            
+            keywords.forEach(keyword => {
+                const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+                styledBefore = styledBefore.replace(regex, `<span class="keyword">${keyword}</span>`);
+                styledAfter = styledAfter.replace(regex, `<span class="keyword">${keyword}</span>`);
+            });
         }
         
-        // Apply trimming to the content before cursor for ghost text display
-        const beforeCursor = escapeHtml(code.substring(0, textIndex - charactersToDelete)).replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
-        const afterCursor = escapeHtml(code.substring(textIndex)).replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+        // Convert tabs and newlines
+        styledBefore = styledBefore.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+        styledAfter = styledAfter.replace(/\n/g, '<br>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
         
-        // Also convert tabs and newlines in ghost text
-        const ghostText = escapeHtml(completion.label).replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+        const currentCompletion = completions[completionIndex];
+        let ghostText = currentCompletion.label;
         
-        // Add subtle indicator when there are multiple completions
-        const multipleIndicator = completions.length > 1 ? 
-            ` <span class="completion-indicator">[${completionIdx + 1}/${completions.length}]</span>` : '';
+        // Handle snippet trimming for ghost text
+        if (currentCompletion.type === 'snippet' && currentCompletion.replaceLength !== undefined) {
+            const charactersToDelete = currentCompletion.replaceLength;
+            if (charactersToDelete > 0) {
+                // Remove characters from the end of styledBefore to account for trimming
+                const beforeText = beforeCursor.substring(0, beforeCursor.length - charactersToDelete);
+                styledBefore = beforeText;
+                
+                // Re-apply keyword highlighting to the trimmed before text
+                if (editor && editor.getKeywords) {
+                    const keywords = editor.getKeywords();
+                    keywords.sort((a, b) => b.length - a.length);
+                    
+                    keywords.forEach(keyword => {
+                        const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+                        styledBefore = styledBefore.replace(regex, `<span class="keyword">${keyword}</span>`);
+                    });
+                }
+                styledBefore = styledBefore.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+            }
+        }
         
-        return beforeCursor + 
-            `<span class="ghost-text">${ghostText}${multipleIndicator}</span>` + 
-            afterCursor;
+        // Convert newlines in ghost text
+        ghostText = ghostText.replace(/\n/g, '<br>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+        
+        // Add completion indicator if multiple completions
+        const indicator = completions.length > 1 ? `<span class="completion-indicator">[${completionIndex + 1}/${completions.length}]</span>` : '';
+        
+        return styledBefore + 
+            `<span class="ghost-text">${ghostText}</span>` + 
+            indicator + 
+            styledAfter;
     }
     
-    
     onMount(async () => {
-        editor = new RCodeEdytor();
+        if (!editorClass) {
+            throw new Error('CodeEdytor: editorClass prop is required');
+        }
+        
+        editor = new editorClass();
         await editor.init();
         code = initialCode;
         
@@ -248,7 +353,10 @@
 
 </script>
 
-<div class="code-editor-container">
+<div 
+    class="code-editor-container"
+    style="width: {width}; height: {height}; min-height: {minHeight}; max-height: {maxHeight}; max-width: {maxWidth}; min-width: {minWidth};"
+>
     <!-- Styled display layer - non-editable div -->
     <div bind:this={underlayElement}
         class="code-underlay"
@@ -274,10 +382,10 @@
 </div>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
+    
     .code-editor-container {
         position: relative;
-        width: 100%;
-        min-height: 200px;
         border: 1px solid #ccc;
         border-radius: 4px;
         background: white;
@@ -286,18 +394,17 @@
     .code-underlay {
         position: relative;
         width: 100%;
-        min-height: 200px;
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        height: 100%;
+        font-family: 'Nanum Gothic Coding', 'Consolas', 'Monaco', 'Courier New', monospace;
         font-size: 14px;
         line-height: 1.5;
-        max-height: 200px;
         padding: 10px;
         margin: 0;
         border: none;
         outline: none;
         word-wrap: break-word;
         z-index: 1;
-        overflow-y: auto; /* Allow scrolling */
+        overflow-y: auto;
         box-sizing: border-box;
         background: white;
         color: black;
@@ -312,19 +419,18 @@
         left: 0;
         width: 100%;
         height: 100%;
-        max-height: 200px;
         background: transparent;
         color: transparent; 
         border: none;
         outline: none;
         margin: 0;
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-family: 'Nanum Gothic Coding', 'Consolas', 'Monaco', 'Courier New', monospace;
         font-size: 14px;
         line-height: 1.5;
         padding: 10px;
         resize: none;
         z-index: 2;
-        overflow-y: auto; /* Enable scrolling on overlay too */
+        overflow-y: auto;
         box-sizing: border-box;
         caret-color: #007acc;
         tab-size: 4;
@@ -335,7 +441,6 @@
         color: rgba(153, 153, 153, 0.5);
     }
     
-    /* Style ghost text in the underlay */
     .code-underlay :global(.ghost-text) {
         color: #999;
         background-color: rgba(152, 205, 255, 0.15);
@@ -350,7 +455,22 @@
         margin-left: 4px;
     }
 
-
-
-
+    :global(.keyword) {
+        font-weight: 700; /* Use the bold weight from Nanum Gothic Coding */
+        color: #0066cc;
+    }
+    
+    :global(.ghost-text) {
+        color: #666;
+        opacity: 0.6;
+    }
+    
+    :global(.completion-indicator) {
+        font-size: 10px;
+        color: #999;
+        background: #f0f0f0;
+        padding: 1px 4px;
+        border-radius: 3px;
+        margin-left: 4px;
+    }
 </style>
