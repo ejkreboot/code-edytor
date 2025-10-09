@@ -15,6 +15,8 @@
 	},
 	"files": [
 		"dist",
+		"LICENSES",
+		"static/woff2",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
@@ -51,12 +53,11 @@
 		"prettier-plugin-svelte": "^3.3.3",
 		"publint": "^0.3.2",
 		"svelte": "^5.0.0",
-		"tree-sitter-cli": "^0.25.10",
 		"typescript": "^5.3.2",
 		"vite": "^7.0.4",
 		"vitest": "^3.2.3",
 		"vitest-browser-svelte": "^0.1.0",
-		"web-tree-sitter": "^0.24.7"
+		"web-tree-sitter": "0.24.7"
 	},
 	"keywords": [
 		"svelte"

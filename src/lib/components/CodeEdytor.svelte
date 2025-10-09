@@ -8,6 +8,20 @@
             initialCode="" 
         />
 
+        <!-- With available variables from namespace -->
+        <CodeEdytor 
+            editorClass={RCodeEdytor}
+            initialCode="" 
+            availableVariables={['df', 'x', 'y', 'model']}
+        />
+
+        <!-- With dynamic variable callback (for Jupyter-like environments) -->
+        <CodeEdytor 
+            editorClass={RCodeEdytor}
+            initialCode="" 
+            onVariableRequest={async () => await getNotebookVariables()}
+        />
+
         <!-- Python Code Editor (future) -->
         <CodeEdytor 
             editorClass={PythonCodeEdytor}
@@ -36,6 +50,8 @@
 
     export let editorClass; // The editor class to instantiate (RCodeEdytor, PythonCodeEdytor, etc.)
     export let initialCode = "";
+    export let availableVariables = []; // List of variables in namespace (reactive)
+    export let onVariableRequest = null; // Callback to get current variables
     // svelte-ignore export_let_unused
     export let width = "100%";
     // svelte-ignore export_let_unused
@@ -48,10 +64,13 @@
     export let maxWidth = "100%";
     // svelte-ignore export_let_unused
     export let minWidth = "300px";
+    // svelte-ignore export_let_unused
+    export let fontFamily = 'Monaspace Neon VF';
     
     let editor;
     let codeEditor;
     let underlayElement;
+    let lineNumbersElement;
     let code = initialCode;
     let completions = [];
     let completionIndex = 0; // Track which completion is selected
@@ -64,9 +83,22 @@
     // Generate styled content with ghost text for the underlay
     $: styledContent = generateStyledContent(code, completions, isPreviewActive, cursorPosition, completionIndex);
     
+    // Generate line numbers
+    $: lineNumbers = generateLineNumbers(code);
+    
     // Automatically update underlay when styledContent changes
     $: if (underlayElement && (styledContent || styledContent === "")) {
         underlayElement.innerHTML = styledContent;
+    }
+    
+    // Automatically update line numbers when they change
+    $: if (lineNumbersElement && lineNumbers) {
+        lineNumbersElement.innerHTML = lineNumbers;
+    }
+    
+    // Reactively update available variables in the editor
+    $: if (editor && availableVariables) {
+        editor.setAvailableVariables(availableVariables);
     }
      
     function escapeHtml(text) {
@@ -76,6 +108,16 @@
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
+    }
+    
+    function generateLineNumbers(code) {
+        const lines = code.split('\n');
+        const lineCount = lines.length;
+        
+        return lines.map((_, index) => {
+            const lineNumber = index + 1;
+            return `<div class="line-number">${lineNumber}</div>`;
+        }).join('');
     }
     
     function generateStyledContent(code, completions, showGhost, cursorPos, completionIndex) {
@@ -92,6 +134,18 @@
                 // Use word boundaries to match whole words only
                 const regex = new RegExp(`\\b${keyword}\\b`, 'g');
                 content = content.replace(regex, `<span class="keyword">${keyword}</span>`);
+            });
+        }
+        
+        // Apply variable highlighting for known variables
+        if (availableVariables && availableVariables.length > 0) {
+            // Sort variables by length (longest first) to avoid partial matches
+            availableVariables.sort((a, b) => b.length - a.length);
+            
+            availableVariables.forEach(variable => {
+                // Use word boundaries to match whole words only
+                const regex = new RegExp(`\\b${variable}\\b`, 'g');
+                content = content.replace(regex, `<span class="known-variable">${variable}</span>`);
             });
         }
         
@@ -125,6 +179,17 @@
             });
         }
         
+        // Apply variable highlighting to both sections
+        if (availableVariables && availableVariables.length > 0) {
+            availableVariables.sort((a, b) => b.length - a.length);
+            
+            availableVariables.forEach(variable => {
+                const regex = new RegExp(`\\b${variable}\\b`, 'g');
+                styledBefore = styledBefore.replace(regex, `<span class="known-variable">${variable}</span>`);
+                styledAfter = styledAfter.replace(regex, `<span class="known-variable">${variable}</span>`);
+            });
+        }
+        
         // Convert tabs and newlines
         styledBefore = styledBefore.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
         styledAfter = styledAfter.replace(/\n/g, '<br>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
@@ -148,6 +213,16 @@
                     keywords.forEach(keyword => {
                         const regex = new RegExp(`\\b${keyword}\\b`, 'g');
                         styledBefore = styledBefore.replace(regex, `<span class="keyword">${keyword}</span>`);
+                    });
+                }
+                
+                // Re-apply variable highlighting to the trimmed before text
+                if (availableVariables && availableVariables.length > 0) {
+                    availableVariables.sort((a, b) => b.length - a.length);
+                    
+                    availableVariables.forEach(variable => {
+                        const regex = new RegExp(`\\b${variable}\\b`, 'g');
+                        styledBefore = styledBefore.replace(regex, `<span class="known-variable">${variable}</span>`);
                     });
                 }
                 styledBefore = styledBefore.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
@@ -201,6 +276,15 @@
         
         if (editor.shouldTriggerCompletion(charAtCursor, cursorPosition)) {
             try {
+                // Request fresh variables if callback provided
+                if (onVariableRequest) {
+                    const freshVariables = await onVariableRequest();
+                    if (freshVariables) {
+                        availableVariables = freshVariables;
+                        editor.setAvailableVariables(freshVariables);
+                    }
+                }
+                
                 const prioritizeSnippets = editor.shouldPrioritizeSnippets(charAtCursor, cursorPosition);
                 completions = await editor.getTrimmedCompletions(cursorPosition, prioritizeSnippets);
                 
@@ -290,10 +374,13 @@
     }
 
     function handleScroll(event) {
-        // Synchronize scroll position between overlay and underlay
+        // Synchronize scroll position between overlay, underlay, and line numbers
         if (underlayElement && codeEditor) {
             underlayElement.scrollTop = codeEditor.scrollTop;
             underlayElement.scrollLeft = codeEditor.scrollLeft;
+        }
+        if (lineNumbersElement && codeEditor) {
+            lineNumbersElement.scrollTop = codeEditor.scrollTop;
         }
     }
 
@@ -355,47 +442,107 @@
 
 <div 
     class="code-editor-container"
-    style="width: {width}; height: {height}; min-height: {minHeight}; max-height: {maxHeight}; max-width: {maxWidth}; min-width: {minWidth};"
->
-    <!-- Styled display layer - non-editable div -->
-    <div bind:this={underlayElement}
-        class="code-underlay"
-        aria-hidden="false"
+    style="width: {width}; 
+           height: {height}; 
+           min-height: {minHeight}; 
+           max-height: {maxHeight}; 
+           max-width: {maxWidth}; 
+           min-width: {minWidth};
+           font-family: {fontFamily};">
+    <!-- Line numbers gutter -->
+    <div bind:this={lineNumbersElement}
+        class="line-numbers-gutter"
+        aria-hidden="true"
     >
     </div>
     
-    <!-- Interactive layer - textarea -->
-    <textarea 
-        bind:this={codeEditor}
-        bind:value={code}
-        on:input={handleInput}
-        on:keydown={handleKeydown}
-        on:click={updateCursorPosition}
-        on:scroll={handleScroll}
-        class="code-overlay"
-        tabindex="0"
-        aria-label="Code editor"
-        placeholder=""
-    ></textarea>
-    
+    <!-- Code content area -->
+    <div class="code-content-area">
+        <!-- Styled display layer - non-editable div -->
+        <div bind:this={underlayElement}
+            class="code-underlay"
+            aria-hidden="false"
+        >
+        </div>
+        
+        <!-- Interactive layer - textarea -->
+        <textarea 
+            bind:this={codeEditor}
+            bind:value={code}
+            on:input={handleInput}
+            on:keydown={handleKeydown}
+            on:click={updateCursorPosition}
+            on:scroll={handleScroll}
+            class="code-overlay"
+            tabindex="0"
+            aria-label="Code editor"
+            placeholder=""
+        ></textarea>
+    </div>
 
 </div>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
-    
+    @font-face {
+        font-family: 'Fira Code VF';
+        src: url('woff2/FiraCode-VF.woff2') format('woff2-variations'),
+            url('woff/FiraCode-VF.woff') format('woff-variations');
+        /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
+        font-weight: 300 700;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Monaspace Neon VF';
+        src: url('woff2/Monaspace Neon Var.woff2') format('woff2-variations'),
+            url('woff/Monaspace Neon Var.woff') format('woff-variations');
+        /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
+        font-weight: 300 700;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Monaspace Argon VF';
+        src: url('woff2/Monaspace Argon Var.woff2') format('woff2-variations'),
+            url('woff/Monaspace Argon Var.woff') format('woff-variations');
+        /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
+        font-weight: 300 700;
+        font-style: normal;
+    }
+
     .code-editor-container {
         position: relative;
         border: 1px solid #ccc;
         border-radius: 4px;
         background: white;
+        display: flex;
+    }
+    
+    .line-numbers-gutter {
+        width: 50px;
+        background: #f8f9fa;
+        border-right: 1px solid #e9ecef;
+        font-size: 14px;
+        line-height: 1.5;
+        padding: 10px 5px;
+        margin: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        user-select: none;
+        text-align: right;
+        color: #6c757d;
+    }
+    
+    .code-content-area {
+        flex: 1;
+        position: relative;
     }
     
     .code-underlay {
         position: relative;
         width: 100%;
         height: 100%;
-        font-family: 'Nanum Gothic Coding', 'Consolas', 'Monaco', 'Courier New', monospace;
         font-size: 14px;
         line-height: 1.5;
         padding: 10px;
@@ -424,7 +571,6 @@
         border: none;
         outline: none;
         margin: 0;
-        font-family: 'Nanum Gothic Coding', 'Consolas', 'Monaco', 'Courier New', monospace;
         font-size: 14px;
         line-height: 1.5;
         padding: 10px;
@@ -458,6 +604,20 @@
     :global(.keyword) {
         font-weight: 700; /* Use the bold weight from Nanum Gothic Coding */
         color: #0066cc;
+    }
+    
+    :global(.known-variable) {
+        color: #faa336; /* Brand orange color */
+        text-decoration: underline;
+        text-decoration-color: rgba(250, 163, 54, 0.6); /* Subtle underline */
+        text-underline-offset: 2px;
+    }
+    
+    :global(.line-number) {
+        height: 21px; /* Match line-height * font-size */
+        font-size: 12px;
+        color: #adb5bd;
+        padding-right: 8px;
     }
     
     :global(.ghost-text) {

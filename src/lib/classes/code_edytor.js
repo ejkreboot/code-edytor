@@ -10,6 +10,7 @@ export class CodeEdytor {
         this.tree = null;
         this.language = language;
         this.snippets = new Map();
+        this.availableVariables = []; // Runtime variables from namespace
         this.init();
     }
 
@@ -149,6 +150,15 @@ export class CodeEdytor {
         if (this.parser) {
             this.tree = this.parser.parse(this.content, this.tree);
         }
+    }
+
+    // Variable namespace management
+    setAvailableVariables(variables) {
+        this.availableVariables = Array.isArray(variables) ? variables : [];
+    }
+
+    getAvailableVariables() {
+        return this.availableVariables;
     }
 
     textIndexToPosition(text, index) {
@@ -298,6 +308,11 @@ export class CodeEdytor {
 
         for (const id of this.collectIdentifiers(tree, cursorIndex)) {
             if (id.startsWith(prefix)) suggestions.push(add(id, "variable"));
+        }
+
+        // Add available variables from namespace
+        for (const variable of this.availableVariables) {
+            if (variable.startsWith(prefix)) suggestions.push(add(variable, "variable"));
         }
 
         for (const name of Object.keys(this.getBuiltinFunctions())) {
