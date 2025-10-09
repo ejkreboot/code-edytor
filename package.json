@@ -11,7 +11,7 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"postinstall": "cp node_modules/web-tree-sitter/tree-sitter.wasm static/tree-sitter.wasm; cp node_modules/@davisvaughan/tree-sitter-r/tree-sitter-r.wasm static/tree-sitter-r.wasm; cp node_modules/tree-sitter-python/tree-sitter-python.wasm static/;"
+		"postinstall": "cp node_modules/web-tree-sitter/tree-sitter.wasm static/tree-sitter.wasm; cp node_modules/@davisvaughan/tree-sitter-r/tree-sitter-r.wasm static/tree-sitter-r.wasm; cp node_modules/tree-sitter-python/tree-sitter-python.wasm static/;cp node_modules/tree-sitter-javascript/tree-sitter-javascript.wasm static/;"
 	},
 	"files": [
 		"dist",
@@ -53,6 +53,7 @@
 		"prettier-plugin-svelte": "^3.3.3",
 		"publint": "^0.3.2",
 		"svelte": "^5.0.0",
+		"tree-sitter-javascript": "^0.23.1",
 		"tree-sitter-python": "0.23.6",
 		"typescript": "^5.3.2",
 		"vite": "^7.0.4",

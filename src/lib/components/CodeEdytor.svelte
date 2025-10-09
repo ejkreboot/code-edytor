@@ -32,9 +32,15 @@
             onVariableRequest={async () => await getNotebookVariables()}
         />
 
-        <!-- Python Code Editor (future) -->
+        <!-- Python Code Editor -->
         <CodeEdytor 
             editorClass={PythonCodeEdytor}
+            initialCode="" 
+        />
+
+        <!-- JavaScript Code Editor -->
+        <CodeEdytor 
+            editorClass={JSCodeEdytor}
             initialCode="" 
         />
 

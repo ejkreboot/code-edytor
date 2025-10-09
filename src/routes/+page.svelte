@@ -2,6 +2,7 @@
     import CodeEdytor from '$lib/components/CodeEdytor.svelte';
     import { RCodeEdytor } from '$lib/classes/r_code_edytor.js';
     import { PythonCodeEdytor } from '$lib/classes/python_code_edytor.js';
+    import { JSCodeEdytor } from '$lib/classes/js_code_edytor.js';
 </script>
 <style>
 
@@ -35,3 +36,9 @@
             maxWidth="800px"
             availableVariables={['dogs', 'cats', 'parks', 'precipitation']} 
             initialCode={`if dogs == 5:\n\tprint(dogs)`} />
+
+<h2>JavaScript Code Edytor</h2>
+<CodeEdytor editorClass={JSCodeEdytor} 
+            maxWidth="800px"
+            availableVariables={['users', 'data', 'config', 'response']} 
+            initialCode={`if (users.length > 0) {\n\tconsole.log(users);\n}`} />
