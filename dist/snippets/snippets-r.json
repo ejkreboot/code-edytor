@@ -1,0 +1,37 @@
+{
+  "if": {
+    "label": "if",
+    "snippet": "if (condition) {\n\t# code\n}",
+    "description": "if statement"
+  },
+  "ifelse": {
+    "label": "ifelse", 
+    "snippet": "if (condition) {\n\t# code\n} else {\n\t# else code\n}",
+    "description": "if-else statement"
+  },
+  "for": {
+    "label": "for",
+    "snippet": "for (i in 1:10) {\n\t# code\n}",
+    "description": "for loop"
+  },
+  "while": {
+    "label": "while",
+    "snippet": "while (condition) {\n\t# code\n}",
+    "description": "while loop"
+  },
+  "function": {
+    "label": "function",
+    "snippet": "name <- function(args) {\n\t# code\n\treturn(result)\n}",
+    "description": "function definition"
+  },
+  "library": {
+    "label": "library",
+    "snippet": "library(package)",
+    "description": "load library"
+  },
+  "dataframe": {
+    "label": "data.frame",
+    "snippet": "data.frame(\n\tcol1 = values1,\n\tcol2 = values2\n)",
+    "description": "create data frame"
+  }
+}
