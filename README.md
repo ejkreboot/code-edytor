@@ -73,6 +73,68 @@ A simple, lightish weight, language-agnostic code editor component for Svelte wi
 | `maxWidth` | `string` | `"100%"` | Maximum width |
 | `minWidth` | `string` | `"300px"` | Minimum width |
 | `font-family` | `string` | `"Monaspace Neon V"` | Font |
+| `oninput` | `(event) => void` | `null` | Callback on every input change |
+| `onchange` | `(newCode) => void` | `null` | Callback when content changes |
+| `onblur` | `(event) => void` | `null` | Callback when editor loses focus |
+| `onfocus` | `(event) => void` | `null` | Callback when editor gains focus |
+| `value` | `string` | `undefined` | For two-way binding with `bind:value` |
+
+### Methods
+
+The component exposes methods for external integration:
+
+| Method | Parameters | Description |
+|--------|------------|-------------|
+| `updateCode(newCode, preserveCursor?)` | `string`, `boolean` | Update editor content from external source |
+| `getCode()` | none | Get current code content |
+
+### Real-time Collaboration Example
+
+```svelte
+<script>
+    import { CodeEdytor, RCodeEdytor } from 'code-edytor';
+    
+    let codeEditor;
+    
+    // Handle user input for real-time sync
+    function handleInput(event) {
+        // Send changes to collaboration server
+        collaborationClient.sendChange(codeEditor.getCode());
+    }
+    
+    // Handle incoming changes from other users
+    function handleRemoteChange(newCode) {
+        codeEditor.updateCode(newCode, true); // preserve cursor
+    }
+</script>
+
+<CodeEdytor 
+    bind:this={codeEditor}
+    editorClass={RCodeEdytor}
+    oninput={handleInput}
+    onchange={(code) => console.log('Code changed:', code)}
+    onblur={() => console.log('Editor blurred')}
+    onfocus={() => console.log('Editor focused')}
+/>
+```
+
+### Two-way Binding
+
+You can use `bind:value` just like with a textarea:
+
+```svelte
+<script>
+    import { CodeEdytor, PythonCodeEdytor } from 'code-edytor';
+    
+    let code = 'print("Hello World")';
+</script>
+
+<!-- Two-way binding -->
+<CodeEdytor bind:value={code} editorClass={PythonCodeEdytor} />
+
+<!-- This input will stay in sync with the editor -->
+<input bind:value={code} placeholder="Same content as editor" />
+```
 
 ### Keyboard Shortcuts
 

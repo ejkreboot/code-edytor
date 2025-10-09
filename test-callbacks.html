@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeEdytor Callback Test</title>
+</head>
+<body>
+    <h1>CodeEdytor Real-time Callback Test</h1>
+    
+    <div id="app"></div>
+    
+    <div id="log" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: auto;">
+        <h3>Event Log:</h3>
+    </div>
+    
+    <button onclick="updateFromExternal()">Simulate External Update</button>
+    <button onclick="getCodeFromEditor()">Get Current Code</button>
+    
+    <script type="module">
+        import { mount } from './src/lib/index.js';
+        import CodeEdytor from './src/lib/components/CodeEdytor.svelte';
+        import { RCodeEdytor } from './src/lib/classes/r_code_edytor.js';
+        
+        let codeEditorInstance;
+        const log = document.getElementById('log');
+        
+        function addLog(message) {
+            const p = document.createElement('p');
+            p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.appendChild(p);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        // Mount the component with callbacks
+        codeEditorInstance = mount(CodeEdytor, {
+            target: document.getElementById('app'),
+            props: {
+                editorClass: RCodeEdytor,
+                initialCode: "library(dplyr)\n# Type to test callbacks",
+                width: "600px",
+                height: "300px",
+                oninput: (event) => {
+                    addLog(`Input event: ${event.target.value.length} characters`);
+                },
+                onchange: (newCode) => {
+                    addLog(`Change event: "${newCode.slice(0, 30)}${newCode.length > 30 ? '...' : ''}"`);
+                },
+                onblur: (event) => {
+                    addLog('Editor lost focus');
+                },
+                onfocus: (event) => {
+                    addLog('Editor gained focus');
+                }
+            }
+        });
+        
+        // Test external updates
+        window.updateFromExternal = () => {
+            const newCode = `library(ggplot2)\n# Updated at ${new Date().toLocaleTimeString()}`;
+            codeEditorInstance.updateCode(newCode);
+            addLog('External update applied');
+        };
+        
+        // Test getting code
+        window.getCodeFromEditor = () => {
+            const currentCode = codeEditorInstance.getCode();
+            addLog(`Current code: "${currentCode.slice(0, 50)}${currentCode.length > 50 ? '...' : ''}"`);
+        };
+        
+        addLog('CodeEdytor with callbacks initialized');
+    </script>
+</body>
+</html>
