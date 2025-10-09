@@ -1,73 +1,26 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount, createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
     
-    // HTML escaping function to prevent regex issues with HTML tags
-    function escapeHtml(text) {
-        return text
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#39;");
-    }
-    
-    /* USAGE 
+    /* USAGE exmple:
         <!-- R Code Editor -->
         <CodeEdytor 
             editorClass={RCodeEdytor}
             initialCode="" 
         />
-
-        <!-- With available variables from namespace -->
-        <CodeEdytor 
-            editorClass={RCodeEdytor}
-            initialCode="" 
-            availableVariables={['df', 'x', 'y', 'model']}
-        />
-
-        <!-- With dynamic variable callback (for Jupyter-like environments) -->
-        <CodeEdytor 
-            editorClass={RCodeEdytor}
-            initialCode="" 
-            onVariableRequest={async () => await getNotebookVariables()}
-        />
-
-        <!-- Python Code Editor -->
-        <CodeEdytor 
-            editorClass={PythonCodeEdytor}
-            initialCode="" 
-        />
-
-        <!-- JavaScript Code Editor -->
-        <CodeEdytor 
-            editorClass={JSCodeEdytor}
-            initialCode="" 
-        />
-
-        <!-- Custom dimensions -->
-        <CodeEdytor 
-            editorClass={RCodeEdytor}
-            initialCode="" 
-            width="800px"
-            height="400px"
-            maxHeight="600px"
-            minHeight="300px"
-        />
-
-        <!-- Responsive design -->
-        <CodeEdytor 
-            editorClass={RCodeEdytor}
-            initialCode="" 
-            width="100%"
-            maxWidth="1200px"
-            height="50vh"
-        />
     */
-
+   
     export let editorClass; // The editor class to instantiate (RCodeEdytor, PythonCodeEdytor, etc.)
     export let initialCode = "";
+    export let value = undefined; // For two-way binding with bind:value
     export let availableVariables = []; // List of variables in namespace (reactive)
     export let onVariableRequest = null; // Callback to get current variables
+    
+    // Callback props for real-time collaboration
+    export let oninput = null; // Called on every input change: (event) => {}
+    export let onblur = null;  // Called when editor loses focus: (event) => {}
+    export let onchange = null; // Called when content changes: (newCode) => {}
+    export let onfocus = null;  // Called when editor gains focus: (event) => {}
     // svelte-ignore export_let_unused
     export let width = "100%";
     // svelte-ignore export_let_unused
@@ -87,41 +40,47 @@
     let codeEditor;
     let underlayElement;
     let lineNumbersElement;
-    let code = initialCode;
+    let code = value !== undefined ? value : initialCode;
     let completions = [];
     let completionIndex = 0; // Track which completion is selected
+    let internalValue = value; // Track the last value we set internally
+    
+    // Watch for external value changes (from bind:value)  
+    $: if (value !== undefined && value !== internalValue) {
+        code = value;
+        internalValue = value;
+    }
+    
+    // Dispatch value changes for bind:value
+    function dispatchValue(newCode) {
+        if (value !== undefined) {
+            internalValue = newCode; // Update our internal tracking
+            value = newCode; // Update the bound value
+        }
+    }
     let cursorPosition = { row: 0, column: 0 };
     let previewText = "";
     let previewPosition = -1;
     let isPreviewActive = false;
-
     
-    // Generate styled content with ghost text for the underlay
     $: styledContent = generateStyledContent(code, completions, isPreviewActive, cursorPosition, completionIndex);
-    
-    // Generate line numbers
     $: lineNumbers = generateLineNumbers(code);
-    
-    // Automatically update underlay when styledContent changes
     $: if (underlayElement && (styledContent || styledContent === "")) {
         underlayElement.innerHTML = styledContent;
     }
+    $: if (lineNumbersElement && lineNumbers) {
+        lineNumbersElement.innerHTML = lineNumbers;
+    }
+    $: if (editor && availableVariables) {
+        editor.setAvailableVariables(availableVariables);
+    }
+
     
     // Force underlay update in case Svelte reactivity lags (e.g., after select-all delete)
     if (underlayElement && (styledContent || styledContent === "")) {
         underlayElement.innerHTML = styledContent;
     }
     
-    // Automatically update line numbers when they change
-    $: if (lineNumbersElement && lineNumbers) {
-        lineNumbersElement.innerHTML = lineNumbers;
-    }
-    
-    // Reactively update available variables in the editor
-    $: if (editor && availableVariables) {
-        editor.setAvailableVariables(availableVariables);
-    }
-     
     
     function generateLineNumbers(code) {
         const lines = code.split('\n');
@@ -133,8 +92,20 @@
         }).join('');
     }
     
+    // HTML escaping function to prevent regex issues with HTML tags
+    function escapeHtml(text) {
+        if (!text || typeof text !== 'string') {
+            return '';
+        }
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
     function generateStyledContent(code, completions, showGhost, cursorPos, completionIndex) {
-        // Helper function to apply all styling to a text segment
         function applyAllStyling(text) {
             let styledText = escapeHtml(text);
             
@@ -142,7 +113,6 @@
             const placeholders = new Map();
             let placeholderCounter = 0;
             
-            // Apply keyword highlighting first
             if (editor && editor.getKeywords) {
                 const keywords = editor.getKeywords();
                 keywords.sort((a, b) => b.length - a.length);
@@ -157,7 +127,6 @@
                 });
             }
             
-            // Apply variable highlighting for known variables
             if (availableVariables && availableVariables.length > 0) {
                 availableVariables.sort((a, b) => b.length - a.length);
                 
@@ -232,23 +201,26 @@
         
         editor = new editorClass();
         await editor.init();
-        code = initialCode;
         
-        // Fix: Use .value for textarea, not .textContent
-        if (codeEditor && initialCode) {
-            codeEditor.value = initialCode;  // Changed from textContent
-            editor.onInput(initialCode);
+        // Don't overwrite code if using bind:value - it's already set correctly
+        if (value === undefined) {
+            code = initialCode;
+        }
+        
+        // Set textarea value to current code (whether from initialCode or bind:value)
+        if (codeEditor && code) {
+            codeEditor.value = code;
+            editor.onInput(code);
         }
     });
     
     async function handleInput(event) {
-        // Reset completion cycling when user types
         completionIndex = 0;
         isPreviewActive = false;
         previewText = "";
         previewPosition = -1;
         
-        // Note: code is already updated via bind:value, so we use that directly
+        code = event.target.value;
         const textIndex = getCursorPosition(); 
         
         cursorPosition = editor ? editor.textIndexToPosition(code, textIndex) : { row: 0, column: 0 };
@@ -290,6 +262,16 @@
             isPreviewActive = false;
             previewText = "";
         }
+        
+        if (oninput && typeof oninput === 'function') {
+            oninput(event);
+        }
+        
+        if (onchange && typeof onchange === 'function') {
+            onchange(code);
+        }
+        
+        dispatchValue(code);
     }
 
     function getTextContent() {
@@ -349,7 +331,6 @@
             return;
         }
         
-        // Handle up/down arrow cycling through completions
         if (completions.length > 0 && (event.key === 'ArrowUp' || event.key === 'ArrowDown')) {
             event.preventDefault();
             
@@ -377,12 +358,18 @@
     function insertTab() {
         const currentPos = getCursorPosition();
         
-        // Insert 4 spaces instead of tab character to match underlay
         const spaces = '    '; // 4 spaces
         const newCode = code.substring(0, currentPos) + spaces + code.substring(currentPos);
+        
+        const previousCode = code;
         code = newCode;
         
-        // Update cursor position after the spaces
+        if (onchange && typeof onchange === 'function' && code !== previousCode) {
+            onchange(code);
+        }
+
+        dispatchValue(code);
+        
         const newCursorPos = currentPos + 4;
         setTimeout(() => {
             setCursorPosition(newCursorPos);
@@ -390,7 +377,6 @@
             updateCursorPosition();
         }, 0);
         
-        // Update editor state
         editor.onInput(newCode);
     }
     
@@ -409,7 +395,15 @@
         const afterCursor = code.substring(currentPos);
         const newCode = beforeCursor + textToInsert + afterCursor;
         
+        const previousCode = code;
         code = newCode;
+        
+        // Call callback props for completion insertion
+        if (onchange && typeof onchange === 'function' && code !== previousCode) {
+            onchange(code);
+        }
+        
+        dispatchValue(code);
         
         const newCursorPos = currentPos - charactersToDelete + textToInsert.length;
         setTimeout(() => {
@@ -420,12 +414,34 @@
         editor.onInput(newCode);
         updateCursorPosition();
         
-        // Clear completions and reset index
         completions = [];
         completionIndex = 0;
         isPreviewActive = false;
         previewText = "";
         previewPosition = -1;
+    }
+    
+    // Export function to update code from external source (e.g., real-time collaboration)
+    export function updateCode(newCode, preserveCursor = false) {
+        if (!preserveCursor) {
+            code = newCode;
+        } else {
+            const currentCursor = getCursorPosition();
+            code = newCode;
+            setTimeout(() => {
+                setCursorPosition(currentCursor);
+            }, 0);
+        }
+        
+        if (editor) {
+            editor.onInput(code);
+            updateCursorPosition();
+        }
+    }
+    
+    // Export function to get current code (for external access)
+    export function getCode() {
+        return code;
     }
 
 </script>
@@ -458,11 +474,13 @@
         <!-- Interactive layer - textarea -->
         <textarea 
             bind:this={codeEditor}
-            bind:value={code}
+            value={code}
             on:input={handleInput}
             on:keydown={handleKeydown}
             on:click={updateCursorPosition}
             on:scroll={handleScroll}
+            on:focus={(event) => { if (onfocus) onfocus(event); }}
+            on:blur={(event) => { if (onblur) onblur(event); }}
             class="code-overlay"
             tabindex="0"
             aria-label="Code editor"

@@ -85,6 +85,7 @@
 		"url": "https://github.com/ejkreboot/code-edytor/issues"
 	},
 	"dependencies": {
-		"@davisvaughan/tree-sitter-r": "^1.2.0"
+		"@davisvaughan/tree-sitter-r": "^1.2.0",
+		"web-tree-sitter": "0.24.7"
 	}
 }
