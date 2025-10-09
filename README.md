@@ -2,7 +2,7 @@
 
 A simple, lightish weight, language-agnostic code editor component for Svelte with basic code completion, snippets, and syntax highlighting,
 
-![CodeEdytor Demo](demo.png)
+<img src="./static/demo.png" alt="drawing" width="600"/>
 
 ## ✨ Features
 

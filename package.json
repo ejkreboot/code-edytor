@@ -60,8 +60,21 @@
 		"web-tree-sitter": "0.24.7"
 	},
 	"keywords": [
-		"svelte"
+		"svelte",
+		"code-editor",
+		"syntax-highlighting",
+		"completions",
+		"r-language",
+		"tree-sitter"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ejkreboot/code-edytor.git"
+	},
+	"homepage": "https://github.com/ejkreboot/code-edytor#readme",
+	"bugs": {
+		"url": "https://github.com/ejkreboot/code-edytor/issues"
+	},
 	"dependencies": {
 		"@davisvaughan/tree-sitter-r": "^1.2.0"
 	}
