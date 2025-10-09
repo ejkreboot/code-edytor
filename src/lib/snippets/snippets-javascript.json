@@ -1,0 +1,388 @@
+{
+    "log": {
+        "label": "log",
+        "snippet": "console.log()",
+        "description": "Console log"
+    },
+    "error": {
+        "label": "error", 
+        "snippet": "console.error()",
+        "description": "Console error"
+    },
+    "warn": {
+        "label": "warn",
+        "snippet": "console.warn()",
+        "description": "Console warning"
+    },
+    "if": {
+        "label": "if",
+        "snippet": "if (condition) {\n\t// code\n}",
+        "description": "If statement"
+    },
+    "ifel": {
+        "label": "ifel",
+        "snippet": "if (condition) {\n\t// code\n} else {\n\t// else code\n}",
+        "description": "If-else statement"
+    },
+    "for": {
+        "label": "for",
+        "snippet": "for (let i = 0; i < length; i++) {\n\t// code\n}",
+        "description": "For loop"
+    },
+    "forin": {
+        "label": "forin",
+        "snippet": "for (const key in object) {\n\t// code\n}",
+        "description": "For-in loop"
+    },
+    "forof": {
+        "label": "forof",
+        "snippet": "for (const item of array) {\n\t// code\n}",
+        "description": "For-of loop"
+    },
+    "while": {
+        "label": "while",
+        "snippet": "while (condition) {\n\t// code\n}",
+        "description": "While loop"
+    },
+    "dowhile": {
+        "label": "dowhile",
+        "snippet": "do {\n\t// code\n} while (condition)",
+        "description": "Do-while loop"
+    },
+    "func": {
+        "label": "func",
+        "snippet": "function name(params) {\n\t// code\n}",
+        "description": "Function declaration"
+    },
+    "async": {
+        "label": "async",
+        "snippet": "async function name(params) {\n\t// code\n}",
+        "description": "Async function"
+    },
+    "asyncarrow": {
+        "label": "asyncarrow",
+        "snippet": "const name = async (params) => {\n\t// code\n}",
+        "description": "Async arrow function"
+    },
+    "class": {
+        "label": "class",
+        "snippet": "class Name {\n\tconstructor(params) {\n\t\t// constructor code\n\t}\n\n\tmethod() {\n\t\t// method code\n\t}\n}",
+        "description": "Class declaration"
+    },
+    "constructor": {
+        "label": "constructor",
+        "snippet": "constructor(params) {\n\t// constructor code\n}",
+        "description": "Constructor method"
+    },
+    "method": {
+        "label": "method",
+        "snippet": "methodName(params) {\n\t// method code\n}",
+        "description": "Class method"
+    },
+    "try": {
+        "label": "try",
+        "snippet": "try {\n\t// code\n} catch (error) {\n\t// error handling\n}",
+        "description": "Try-catch block"
+    },
+    "tryfinally": {
+        "label": "tryfinally",
+        "snippet": "try {\n\t// code\n} catch (error) {\n\t// error handling\n} finally {\n\t// cleanup\n}",
+        "description": "Try-catch-finally block"
+    },
+    "switch": {
+        "label": "switch",
+        "snippet": "switch (expression) {\n\tcase value:\n\t\t// code\n\t\tbreak;\n\tdefault:\n\t\t// default code\n}",
+        "description": "Switch statement"
+    },
+    "case": {
+        "label": "case",
+        "snippet": "case value:\n\t// code\n\tbreak;",
+        "description": "Switch case"
+    },
+    "import": {
+        "label": "import",
+        "snippet": "import { name } from 'module'",
+        "description": "Named import"
+    },
+    "importdefault": {
+        "label": "importdefault",
+        "snippet": "import name from 'module'",
+        "description": "Default import"
+    },
+    "importall": {
+        "label": "importall",
+        "snippet": "import * as name from 'module'",
+        "description": "Import all as namespace"
+    },
+    "export": {
+        "label": "export",
+        "snippet": "export { name }",
+        "description": "Named export"
+    },
+    "exportdefault": {
+        "label": "exportdefault",
+        "snippet": "export default name",
+        "description": "Default export"
+    },
+    "const": {
+        "label": "const",
+        "snippet": "const name = value",
+        "description": "Const declaration"
+    },
+    "let": {
+        "label": "let",
+        "snippet": "let name = value",
+        "description": "Let declaration"
+    },
+    "var": {
+        "label": "var",
+        "snippet": "var name = value",
+        "description": "Var declaration"
+    },
+    "obj": {
+        "label": "obj",
+        "snippet": "const name = {\n\tkey: value\n}",
+        "description": "Object literal"
+    },
+    "arr": {
+        "label": "arr",
+        "snippet": "const name = [item1, item2]",
+        "description": "Array literal"
+    },
+    "map": {
+        "label": "map",
+        "snippet": "array.map((item) => {\n\treturn item\n})",
+        "description": "Array map"
+    },
+    "filter": {
+        "label": "filter",
+        "snippet": "array.filter((item) => condition)",
+        "description": "Array filter"
+    },
+    "reduce": {
+        "label": "reduce",
+        "snippet": "array.reduce((acc, item) => {\n\treturn acc + item\n}, 0)",
+        "description": "Array reduce"
+    },
+    "foreach": {
+        "label": "foreach",
+        "snippet": "array.forEach((item) => {\n\t// code\n})",
+        "description": "Array forEach"
+    },
+    "find": {
+        "label": "find",
+        "snippet": "array.find((item) => condition)",
+        "description": "Array find"
+    },
+    "promise": {
+        "label": "promise",
+        "snippet": "new Promise((resolve, reject) => {\n\t// async code\n})",
+        "description": "Promise constructor"
+    },
+    "then": {
+        "label": "then",
+        "snippet": ".then((result) => {\n\t// handle result\n})",
+        "description": "Promise then"
+    },
+    "catch": {
+        "label": "catch",
+        "snippet": ".catch((error) => {\n\t// handle error\n})",
+        "description": "Promise catch"
+    },
+    "fetch": {
+        "label": "fetch",
+        "snippet": "fetch('url')\n\t.then(response => response.json())\n\t.then(data => {\n\t\t// handle data\n\t})\n\t.catch(error => {\n\t\tconsole.error('Error:', error);\n\t})",
+        "description": "Fetch API call"
+    },
+    "asyncfetch": {
+        "label": "asyncfetch",
+        "snippet": "try {\n\tconst response = await fetch('url');\n\tconst data = await response.json();\n\t// handle data\n} catch (error) {\n\tconsole.error('Error:', error);\n}",
+        "description": "Async fetch"
+    },
+    "timeout": {
+        "label": "timeout",
+        "snippet": "setTimeout(() => {\n\t// code\n}, 1000)",
+        "description": "Set timeout"
+    },
+    "interval": {
+        "label": "interval",
+        "snippet": "setInterval(() => {\n\t// code\n}, 1000)",
+        "description": "Set interval"
+    },
+    "domready": {
+        "label": "domready",
+        "snippet": "document.addEventListener('DOMContentLoaded', () => {\n\t// code\n})",
+        "description": "DOM ready event"
+    },
+    "getel": {
+        "label": "getel",
+        "snippet": "document.getElementById('elementId')",
+        "description": "Get element by ID"
+    },
+    "query": {
+        "label": "query",
+        "snippet": "document.querySelector('selector')",
+        "description": "Query selector"
+    },
+    "queryall": {
+        "label": "queryall",
+        "snippet": "document.querySelectorAll('selector')",
+        "description": "Query selector all"
+    },
+    "addlistener": {
+        "label": "addlistener",
+        "snippet": "element.addEventListener('event', (e) => {\n\t// handle event\n})",
+        "description": "Add event listener"
+    },
+    "json": {
+        "label": "json",
+        "snippet": "JSON.stringify(object, null, 2)",
+        "description": "JSON stringify"
+    },
+    "parse": {
+        "label": "parse",
+        "snippet": "JSON.parse(jsonString)",
+        "description": "JSON parse"
+    },
+    "destructure": {
+        "label": "destructure",
+        "snippet": "const { property } = object",
+        "description": "Object destructuring"
+    },
+    "destructarr": {
+        "label": "destructarr",
+        "snippet": "const [first, second] = array",
+        "description": "Array destructuring"
+    },
+    "spread": {
+        "label": "spread",
+        "snippet": "...array",
+        "description": "Spread operator"
+    },
+    "template": {
+        "label": "template",
+        "snippet": "`Hello ${name}`",
+        "description": "Template literal"
+    },
+    ".map": {
+        "label": ".map",
+        "snippet": ".map((item) => {\n\treturn item\n})",
+        "description": "Creates new array by calling function on every element"
+    },
+    ".filter": {
+        "label": ".filter",
+        "snippet": ".filter((item) => condition)",
+        "description": "Creates new array with elements that pass a test"
+    },
+    ".forEach": {
+        "label": ".forEach",
+        "snippet": ".forEach((item) => {\n\t// code\n})",
+        "description": "Executes function for each array element"
+    },
+    ".reduce": {
+        "label": ".reduce",
+        "snippet": ".reduce((acc, item) => {\n\treturn acc + item\n}, 0)",
+        "description": "Reduces array to single value"
+    },
+    ".find": {
+        "label": ".find",
+        "snippet": ".find((item) => condition)",
+        "description": "Returns first element that matches condition"
+    },
+    ".includes": {
+        "label": ".includes",
+        "snippet": ".includes(item)",
+        "description": "Checks if array/string contains element"
+    },
+    ".push": {
+        "label": ".push",
+        "snippet": ".push(item)",
+        "description": "Adds element to end of array"
+    },
+    ".pop": {
+        "label": ".pop",
+        "snippet": ".pop()",
+        "description": "Removes last element from array"
+    },
+    ".slice": {
+        "label": ".slice",
+        "snippet": ".slice(start, end)",
+        "description": "Returns shallow copy of portion of array"
+    },
+    ".join": {
+        "label": ".join",
+        "snippet": ".join(separator)",
+        "description": "Joins array elements into string"
+    },
+    ".length": {
+        "label": ".length",
+        "snippet": ".length",
+        "description": "Array or string length property"
+    },
+    ".toLowerCase": {
+        "label": ".toLowerCase",
+        "snippet": ".toLowerCase()",
+        "description": "Converts string to lowercase"
+    },
+    ".toUpperCase": {
+        "label": ".toUpperCase",
+        "snippet": ".toUpperCase()",
+        "description": "Converts string to uppercase"
+    },
+    ".trim": {
+        "label": ".trim",
+        "snippet": ".trim()",
+        "description": "Removes whitespace from ends"
+    },
+    ".split": {
+        "label": ".split",
+        "snippet": ".split(separator)",
+        "description": "Splits string into array"
+    },
+    ".replace": {
+        "label": ".replace",
+        "snippet": ".replace(search, replacement)",
+        "description": "Replaces text in string"
+    },
+
+    ".then": {
+        "label": ".then",
+        "snippet": ".then((result) => {\n\t// handle result\n})",
+        "description": "Handles resolved promise"
+    },
+    ".catch": {
+        "label": ".catch",
+        "snippet": ".catch((error) => {\n\t// handle error\n})",
+        "description": "Handles rejected promise"
+    },
+    ".addEventListener": {
+        "label": ".addEventListener",
+        "snippet": ".addEventListener('event', (e) => {\n\t// handle event\n})",
+        "description": "Adds event listener to element"
+    },
+    ".querySelector": {
+        "label": ".querySelector",
+        "snippet": ".querySelector('selector')",
+        "description": "Finds first matching element"
+    },
+    ".appendChild": {
+        "label": ".appendChild",
+        "snippet": ".appendChild(child)",
+        "description": "Appends child element"
+    },
+    ".style": {
+        "label": ".style",
+        "snippet": ".style",
+        "description": "Element style object"
+    },
+    ".innerHTML": {
+        "label": ".innerHTML",
+        "snippet": ".innerHTML",
+        "description": "HTML content of element"
+    },
+    ".textContent": {
+        "label": ".textContent",
+        "snippet": ".textContent",
+        "description": "Text content of element"
+    }
+}
