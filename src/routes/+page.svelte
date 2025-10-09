@@ -1,6 +1,7 @@
 <script>
     import CodeEdytor from '$lib/components/CodeEdytor.svelte';
     import { RCodeEdytor } from '$lib/classes/r_code_edytor.js';
+    import { PythonCodeEdytor } from '$lib/classes/python_code_edytor.js';
 </script>
 <style>
 
@@ -13,16 +14,24 @@
         font-style: normal;
     }
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-    h1 {
+    h1, h2, h3, h4, h5, h6 {
         font-family: 'Outfit', sans-serif;
         font-weight: 700;
         color: #7a7a7a;
         margin-top: 20px;
     }
 </style>
-<h1>Code edytor demo (RCode)</h1>
+<h1>Code edytor demo</h1>
 
+<h2>R Code Edytor</h2>
 <CodeEdytor editorClass={RCodeEdytor} 
             maxWidth="800px"
             availableVariables={['df', 'trees', 'flowers', 'traffic']} 
             initialCode={`if (length(trees) > 5)) {\n	# code\n} else {\n	# else code\n}`} />
+
+
+<h2>Python Code Edytor</h2>
+<CodeEdytor editorClass={PythonCodeEdytor} 
+            maxWidth="800px"
+            availableVariables={['dogs', 'cats', 'parks', 'precipitation']} 
+            initialCode={`if dogs == 5:\n\tprint(dogs)`} />

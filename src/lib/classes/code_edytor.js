@@ -41,7 +41,7 @@ export class CodeEdytor {
         if (!snippetsPath) return;
         
         try {
-            const snippetsModule = await import(snippetsPath);
+            const snippetsModule = await import(/* @vite-ignore */ snippetsPath);
             const snippetsData = snippetsModule.default;
 
             this.snippets = new Map(Object.entries(snippetsData));
@@ -260,16 +260,15 @@ export class CodeEdytor {
 
         return allCompletions.map(c => {
             if (c.type === 'snippet') {
-
+                const label = c.insertText.startsWith(prefix) ? c.insertText.slice(prefix.length) : c.insertText;
                 const totalReplaceLength = snippetPrefix.length + (prioritizeSnippets ? 1 : 0);
                 return {
-                    label: c.insertText,
+                    label: label,
                     type: c.type,
                     description: c.description,
                     replaceLength: totalReplaceLength
                 };
             } else {
-
                 return c.label.startsWith(prefix) ? 
                     {label: c.label.slice(prefix.length), kind: c.kind} : c;
             }
