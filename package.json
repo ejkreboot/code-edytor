@@ -16,7 +16,7 @@
 		"test:e2e:debug": "playwright test --debug",
 		"test:e2e:report": "playwright show-report",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"publish": "npm run build && git add . && git commit -am 'publishing new version' && npm publish && git add . && git commit -am 'post-publish updates' || true && git push"
+		"publish": "npm run build && npm version patch && npm publish && git push --follow-tags"
 	},
 	"files": [
 		"dist",
