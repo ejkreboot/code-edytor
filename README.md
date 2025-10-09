@@ -14,8 +14,9 @@ A simple, lightish weight, language-agnostic code editor component for Svelte wi
 - **Keywords** in bold blue - language constructs
 - **Known variables** in orange with underlines
 
-### 🔧 **Language Agnostic**
+### **Language Agnostic**
 - **Pluggable editor classes** - Pass any language implementation
+= **Python, R, and Javascript** support included in the box.
 - **Tree-sitter integration** - Robust parsing for syntax analysis
 - **Extensible completion system** - Keywords, functions, snippets, variables
 
@@ -25,6 +26,9 @@ A simple, lightish weight, language-agnostic code editor component for Svelte wi
 <script>
     import CodeEdytor from 'code-edytor';
     import { RCodeEdytor } from 'code-edytor/r';
+    // and or: import { JSCodeEdytor } from 'code-edytor/r';
+    // and or: import { PythonCodeEdytor } from 'code-edytor/r';
+
 </script>
 
 <!-- Basic R editor -->
@@ -49,7 +53,9 @@ A simple, lightish weight, language-agnostic code editor component for Svelte wi
     font-family="Monaspace Argon Var"
 />
 ```
+
 (Note: Monaspace Argon Var, Monaspace Neon Var, and FiraCode-VF are packaged and configured in css. You are also welcome to bring your own font.)
+
 ## 📖 API Reference
 
 ### Props
