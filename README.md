@@ -16,7 +16,7 @@ A simple, lightish weight, language-agnostic code editor component for Svelte wi
 
 ### **Language Agnostic**
 - **Pluggable editor classes** - Pass any language implementation
-= **Python, R, and Javascript** support included in the box.
+- **Python, R, and Javascript** support included in the box.
 - **Tree-sitter integration** - Robust parsing for syntax analysis
 - **Extensible completion system** - Keywords, functions, snippets, variables
 
