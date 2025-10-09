@@ -35,7 +35,6 @@
     // Callback props for real-time collaboration
     export let oninput = null; // Called on every input change: (event) => {}
     export let onblur = null;  // Called when editor loses focus: (event) => {}
-    export let onchange = null; // Called when content changes: (newCode) => {}
     export let onfocus = null;  // Called when editor gains focus: (event) => {}
     // svelte-ignore export_let_unused
     export let width = "100%";
@@ -283,10 +282,6 @@
             oninput(event);
         }
         
-        if (onchange && typeof onchange === 'function') {
-            onchange(code);
-        }
-        
         dispatchValue(code);
     }
 
@@ -380,8 +375,8 @@
         const previousCode = code;
         code = newCode;
         
-        if (onchange && typeof onchange === 'function' && code !== previousCode) {
-            onchange(code);
+        if (oninput && typeof oninput === 'function' && code !== previousCode) {
+            oninput({ target: { value: code }, type: 'input' });
         }
 
         dispatchValue(code);
@@ -414,9 +409,14 @@
         const previousCode = code;
         code = newCode;
         
-        // Call callback props for completion insertion
-        if (onchange && typeof onchange === 'function' && code !== previousCode) {
-            onchange(code);
+        // Trigger oninput callback to maintain consistency with normal input
+        if (oninput && typeof oninput === 'function') {
+            // Create a synthetic event object similar to what handleInput receives
+            const syntheticEvent = {
+                target: { value: code },
+                type: 'input'
+            };
+            oninput(syntheticEvent);
         }
         
         dispatchValue(code);

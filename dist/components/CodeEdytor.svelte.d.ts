@@ -7,7 +7,6 @@ type CodeEdytor = SvelteComponent<{
     onVariableRequest?: any;
     oninput?: any;
     onblur?: any;
-    onchange?: any;
     onfocus?: any;
     width?: string;
     height?: string;
@@ -34,7 +33,6 @@ declare const CodeEdytor: $$__sveltets_2_IsomorphicComponent<{
     onVariableRequest?: any;
     oninput?: any;
     onblur?: any;
-    onchange?: any;
     onfocus?: any;
     width?: string;
     height?: string;
