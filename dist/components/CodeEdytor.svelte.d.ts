@@ -1,11 +1,11 @@
 export default CodeEdytor;
 type CodeEdytor = SvelteComponent<{
     editorClass: any;
-    width?: string;
-    height?: string;
     initialCode?: string;
     availableVariables?: any[];
     onVariableRequest?: any;
+    width?: string;
+    height?: string;
     minHeight?: string;
     maxHeight?: string;
     maxWidth?: string;
@@ -18,11 +18,11 @@ type CodeEdytor = SvelteComponent<{
 };
 declare const CodeEdytor: $$__sveltets_2_IsomorphicComponent<{
     editorClass: any;
-    width?: string;
-    height?: string;
     initialCode?: string;
     availableVariables?: any[];
     onVariableRequest?: any;
+    width?: string;
+    height?: string;
     minHeight?: string;
     maxHeight?: string;
     maxWidth?: string;

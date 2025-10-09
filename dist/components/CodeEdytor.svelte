@@ -1,6 +1,16 @@
 <script>
     import { onMount } from "svelte";
     
+    // HTML escaping function to prevent regex issues with HTML tags
+    function escapeHtml(text) {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+    
     /* USAGE 
         <!-- R Code Editor -->
         <CodeEdytor 
@@ -22,9 +32,15 @@
             onVariableRequest={async () => await getNotebookVariables()}
         />
 
-        <!-- Python Code Editor (future) -->
+        <!-- Python Code Editor -->
         <CodeEdytor 
             editorClass={PythonCodeEdytor}
+            initialCode="" 
+        />
+
+        <!-- JavaScript Code Editor -->
+        <CodeEdytor 
+            editorClass={JSCodeEdytor}
             initialCode="" 
         />
 
@@ -91,6 +107,11 @@
         underlayElement.innerHTML = styledContent;
     }
     
+    // Force underlay update in case Svelte reactivity lags (e.g., after select-all delete)
+    if (underlayElement && (styledContent || styledContent === "")) {
+        underlayElement.innerHTML = styledContent;
+    }
+    
     // Automatically update line numbers when they change
     $: if (lineNumbersElement && lineNumbers) {
         lineNumbersElement.innerHTML = lineNumbers;
@@ -101,14 +122,6 @@
         editor.setAvailableVariables(availableVariables);
     }
      
-    function escapeHtml(text) {
-        return text
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-    }
     
     function generateLineNumbers(code) {
         const lines = code.split('\n');
@@ -121,116 +134,87 @@
     }
     
     function generateStyledContent(code, completions, showGhost, cursorPos, completionIndex) {
-        let content = code;
-        
-        // Apply keyword highlighting first
-        if (editor && editor.getKeywords) {
-            const keywords = editor.getKeywords();
+        // Helper function to apply all styling to a text segment
+        function applyAllStyling(text) {
+            let styledText = escapeHtml(text);
             
-            // Sort keywords by length (longest first) to avoid partial matches
-            keywords.sort((a, b) => b.length - a.length);
+            // Use a placeholder system to avoid double-processing
+            const placeholders = new Map();
+            let placeholderCounter = 0;
             
-            keywords.forEach(keyword => {
-                // Use word boundaries to match whole words only
-                const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-                content = content.replace(regex, `<span class="keyword">${keyword}</span>`);
+            // Apply keyword highlighting first
+            if (editor && editor.getKeywords) {
+                const keywords = editor.getKeywords();
+                keywords.sort((a, b) => b.length - a.length);
+                
+                keywords.forEach(keyword => {
+                    const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+                    styledText = styledText.replace(regex, (match) => {
+                        const placeholder = `__PLACEHOLDER_${placeholderCounter++}__`;
+                        placeholders.set(placeholder, `<span class="keyword">${keyword}</span>`);
+                        return placeholder;
+                    });
+                });
+            }
+            
+            // Apply variable highlighting for known variables
+            if (availableVariables && availableVariables.length > 0) {
+                availableVariables.sort((a, b) => b.length - a.length);
+                
+                availableVariables.forEach(variable => {
+                    const regex = new RegExp(`\\b${variable}\\b`, 'g');
+                    styledText = styledText.replace(regex, (match) => {
+                        const placeholder = `__PLACEHOLDER_${placeholderCounter++}__`;
+                        placeholders.set(placeholder, `<span class="known-variable">${variable}</span>`);
+                        return placeholder;
+                    });
+                });
+            }
+            
+            // Convert whitespace for HTML display
+            // Handle leading spaces and multiple consecutive spaces
+            styledText = styledText.replace(/^( +)/gm, (match) => '&nbsp;'.repeat(match.length));
+            styledText = styledText.replace(/  +/g, (match) => '&nbsp;'.repeat(match.length));
+            styledText = styledText.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+            styledText = styledText.replace(/\n/g, '<br>');
+            
+            // Replace all placeholders with actual HTML
+            placeholders.forEach((html, placeholder) => {
+                styledText = styledText.replace(new RegExp(placeholder, 'g'), html);
             });
-        }
-        
-        // Apply variable highlighting for known variables
-        if (availableVariables && availableVariables.length > 0) {
-            // Sort variables by length (longest first) to avoid partial matches
-            availableVariables.sort((a, b) => b.length - a.length);
             
-            availableVariables.forEach(variable => {
-                // Use word boundaries to match whole words only
-                const regex = new RegExp(`\\b${variable}\\b`, 'g');
-                content = content.replace(regex, `<span class="known-variable">${variable}</span>`);
-            });
+            return styledText;
         }
         
-        // Convert tabs and newlines for HTML display
-        content = content.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
-        
-        if (!showGhost || completions.length === 0) {
-            return content;
+        if (!showGhost || completions.length === 0 || code.length === 0) {
+            return applyAllStyling(code);
         }
-        
+
         // Add ghost text with completion cycling
         const textIndex = editor ? editor.positionToTextIndex(code, cursorPos.row, cursorPos.column) : 0;
         
-        // Calculate how much of the original content to replace for ghost text positioning
-        // We need to account for the HTML tags we've added for keywords
         const beforeCursor = code.substring(0, textIndex);
         const afterCursor = code.substring(textIndex);
         
-        // Apply keyword highlighting to the parts separately
-        let styledBefore = beforeCursor;
-        let styledAfter = afterCursor;
-        
-        if (editor && editor.getKeywords) {
-            const keywords = editor.getKeywords();
-            keywords.sort((a, b) => b.length - a.length);
-            
-            keywords.forEach(keyword => {
-                const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-                styledBefore = styledBefore.replace(regex, `<span class="keyword">${keyword}</span>`);
-                styledAfter = styledAfter.replace(regex, `<span class="keyword">${keyword}</span>`);
-            });
-        }
-        
-        // Apply variable highlighting to both sections
-        if (availableVariables && availableVariables.length > 0) {
-            availableVariables.sort((a, b) => b.length - a.length);
-            
-            availableVariables.forEach(variable => {
-                const regex = new RegExp(`\\b${variable}\\b`, 'g');
-                styledBefore = styledBefore.replace(regex, `<span class="known-variable">${variable}</span>`);
-                styledAfter = styledAfter.replace(regex, `<span class="known-variable">${variable}</span>`);
-            });
-        }
-        
-        // Convert tabs and newlines
-        styledBefore = styledBefore.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
-        styledAfter = styledAfter.replace(/\n/g, '<br>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
-        
         const currentCompletion = completions[completionIndex];
         let ghostText = currentCompletion.label;
+        
+        let actualBeforeText = beforeCursor;
         
         // Handle snippet trimming for ghost text
         if (currentCompletion.type === 'snippet' && currentCompletion.replaceLength !== undefined) {
             const charactersToDelete = currentCompletion.replaceLength;
             if (charactersToDelete > 0) {
-                // Remove characters from the end of styledBefore to account for trimming
-                const beforeText = beforeCursor.substring(0, beforeCursor.length - charactersToDelete);
-                styledBefore = beforeText;
-                
-                // Re-apply keyword highlighting to the trimmed before text
-                if (editor && editor.getKeywords) {
-                    const keywords = editor.getKeywords();
-                    keywords.sort((a, b) => b.length - a.length);
-                    
-                    keywords.forEach(keyword => {
-                        const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-                        styledBefore = styledBefore.replace(regex, `<span class="keyword">${keyword}</span>`);
-                    });
-                }
-                
-                // Re-apply variable highlighting to the trimmed before text
-                if (availableVariables && availableVariables.length > 0) {
-                    availableVariables.sort((a, b) => b.length - a.length);
-                    
-                    availableVariables.forEach(variable => {
-                        const regex = new RegExp(`\\b${variable}\\b`, 'g');
-                        styledBefore = styledBefore.replace(regex, `<span class="known-variable">${variable}</span>`);
-                    });
-                }
-                styledBefore = styledBefore.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+                actualBeforeText = beforeCursor.substring(0, beforeCursor.length - charactersToDelete);
             }
         }
         
-        // Convert newlines in ghost text
-        ghostText = ghostText.replace(/\n/g, '<br>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+        // Apply all styling to the before and after sections
+        const styledBefore = applyAllStyling(actualBeforeText);
+        const styledAfter = applyAllStyling(afterCursor);
+        
+        // Convert newlines and tabs in ghost text for display
+        ghostText = escapeHtml(ghostText).replace(/\n/g, '<br>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
         
         // Add completion indicator if multiple completions
         const indicator = completions.length > 1 ? `<span class="completion-indicator">[${completionIndex + 1}/${completions.length}]</span>` : '';
@@ -329,6 +313,12 @@
         if (editor) {
             editor.cursor = cursorPosition;
         }
+        
+        // Clear completions when user clicks to move cursor (like Escape key)
+        completions = [];
+        isPreviewActive = false;
+        previewText = "";
+        completionIndex = 0;
     }
 
     function handleKeydown(event) {

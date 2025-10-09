@@ -41,7 +41,7 @@ export class CodeEdytor {
         if (!snippetsPath) return;
         
         try {
-            const snippetsModule = await import(snippetsPath);
+            const snippetsModule = await import(/* @vite-ignore */ snippetsPath);
             const snippetsData = snippetsModule.default;
 
             this.snippets = new Map(Object.entries(snippetsData));
@@ -152,7 +152,6 @@ export class CodeEdytor {
         }
     }
 
-    // Variable namespace management
     setAvailableVariables(variables) {
         this.availableVariables = Array.isArray(variables) ? variables : [];
     }
@@ -182,11 +181,29 @@ export class CodeEdytor {
 
         const basicTrigger = /[a-zA-Z\.]/.test(char);
         const spaceSnippetTrigger = char === ' ' && this.snippets.size > 0;
+        
         if (basicTrigger || spaceSnippetTrigger) {
-            const prefix = this.getCompletionPrefix(position);
-            const hasSnippets = this.hasMatchingSnippets(prefix);
-            const shouldTrigger = basicTrigger || spaceSnippetTrigger || hasSnippets;
-            return shouldTrigger;
+            // Use different prefix methods for different triggers
+            let prefix;
+            if (spaceSnippetTrigger) {
+                // For space triggers, use snippet prefix (excludes the space)
+                prefix = this.getSnippetPrefix(position);
+            } else {
+                // For regular typing, use completion prefix
+                prefix = this.getCompletionPrefix(position);
+            }
+            
+            // For dot completions, always show if prefix starts with dot
+            if (prefix.startsWith('.')) {
+                return true;
+            }
+            
+            // For regular snippets, require minimum length of 2 characters
+            // This prevents "i " from triggering "if", "r " from triggering "repeat", etc.
+            if (prefix.length >= 2) {
+                const hasSnippets = this.hasMatchingSnippets(prefix);
+                return hasSnippets;
+            }
         }
         
         return false;
@@ -260,16 +277,15 @@ export class CodeEdytor {
 
         return allCompletions.map(c => {
             if (c.type === 'snippet') {
-
+                const label = c.insertText.startsWith(prefix) ? c.insertText.slice(prefix.length) : c.insertText;
                 const totalReplaceLength = snippetPrefix.length + (prioritizeSnippets ? 1 : 0);
                 return {
-                    label: c.insertText,
+                    label: label,
                     type: c.type,
                     description: c.description,
                     replaceLength: totalReplaceLength
                 };
             } else {
-
                 return c.label.startsWith(prefix) ? 
                     {label: c.label.slice(prefix.length), kind: c.kind} : c;
             }
