@@ -11,7 +11,7 @@ export class JSCodeEdytor extends CodeEdytor {
         await Parser.init();
         
         const parser = new Parser();
-        const JavaScript = await Parser.Language.load('/tree-sitter-javascript.wasm');
+        const JavaScript = await Parser.Language.load('/wasm/tree-sitter-javascript.wasm');
         parser.setLanguage(JavaScript);
 
         return parser;

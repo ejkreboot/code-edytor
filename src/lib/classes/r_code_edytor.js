@@ -15,9 +15,9 @@ export class RCodeEdytor extends CodeEdytor {
 
     async makeParser() {
         await Parser.init({
-            locateFile: (file) => `/tree-sitter.wasm` 
+            locateFile: (file) => `/wasm/tree-sitter.wasm` 
         });
-        const R = await Parser.Language.load('/tree-sitter-r.wasm');
+        const R = await Parser.Language.load('/wasm/tree-sitter-r.wasm');
 
         const parser = new Parser();
         parser.setLanguage(R);

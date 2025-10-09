@@ -11,7 +11,7 @@ export class PythonCodeEdytor extends CodeEdytor {
         await Parser.init();
         
         const parser = new Parser();
-        const Python = await Parser.Language.load('/tree-sitter-python.wasm');
+        const Python = await Parser.Language.load('/wasm/tree-sitter-python.wasm');
         parser.setLanguage(Python);
         
         return parser;

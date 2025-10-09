@@ -5,7 +5,7 @@
     import { JSCodeEdytor } from '$lib/classes/js_code_edytor.js';
 </script>
 <style>
-
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
     @font-face {
         font-family: 'Fira Code VF';
         src: url('woff2/FiraCode-VF.woff2') format('woff2-variations'),
@@ -14,8 +14,7 @@
         font-weight: 300 700;
         font-style: normal;
     }
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2 {
         font-family: 'Outfit', sans-serif;
         font-weight: 700;
         color: #7a7a7a;

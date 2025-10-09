@@ -10,13 +10,13 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run",
-		"postinstall": "cp node_modules/web-tree-sitter/tree-sitter.wasm static/tree-sitter.wasm; cp node_modules/@davisvaughan/tree-sitter-r/tree-sitter-r.wasm static/tree-sitter-r.wasm; cp node_modules/tree-sitter-python/tree-sitter-python.wasm static/;cp node_modules/tree-sitter-javascript/tree-sitter-javascript.wasm static/;"
+		"test": "npm run test:unit -- --run"
 	},
 	"files": [
 		"dist",
 		"LICENSES",
 		"static/woff2",
+		"static/wasm",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
