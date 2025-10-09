@@ -1,4 +1,5 @@
 import { CodeEdytor } from "./code_edytor.js";
+import { getWasmUrl } from "../wasm/index.js";
 
 export class PythonCodeEdytor extends CodeEdytor {
     constructor() {
@@ -11,7 +12,8 @@ export class PythonCodeEdytor extends CodeEdytor {
         await Parser.init();
         
         const parser = new Parser();
-        const Python = await Parser.Language.load('/wasm/tree-sitter-python.wasm');
+        const pythonWasmUrl = getWasmUrl('tree-sitter-python.wasm');
+        const Python = await Parser.Language.load(pythonWasmUrl);
         parser.setLanguage(Python);
         
         return parser;
@@ -68,10 +70,5 @@ export class PythonCodeEdytor extends CodeEdytor {
             'pow': { description: 'Return x to the power of y' },
             'divmod': { description: 'Return quotient and remainder' }
         };
-    }
-
-
-    getSnippetsPath() {
-        return '../snippets/snippets-python.json';
     }
 }

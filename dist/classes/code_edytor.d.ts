@@ -16,7 +16,6 @@ export class CodeEdytor {
     makeParser(): Promise<void>;
     getKeywords(): void;
     getBuiltinFunctions(): void;
-    getSnippetsPath(): string;
     loadSnippets(): Promise<void>;
     getSnippetCompletions(prefix: any, position: any): {
         label: any;

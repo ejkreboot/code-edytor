@@ -20,8 +20,6 @@
 	"files": [
 		"dist",
 		"LICENSES",
-		"static/woff2",
-		"static/wasm",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],

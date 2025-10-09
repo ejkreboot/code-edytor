@@ -31,22 +31,39 @@ export class CodeEdytor {
         throw new Error("getBuiltinFunctions() must be implemented by subclass");
     }
 
-    getSnippetsPath() {
-        if (!this.language) return null;
-        return `../snippets/snippets-${this.language}.json`;
-    }
-
     async loadSnippets() {
-        const snippetsPath = this.getSnippetsPath();
-        if (!snippetsPath) return;
+        if (!this.language) return;
         
         try {
-            const snippetsModule = await import(/* @vite-ignore */ snippetsPath);
-            const snippetsData = snippetsModule.default;
-
-            this.snippets = new Map(Object.entries(snippetsData));
+            let snippetsData = null;
+            
+            // Dynamic import based on language
+            switch (this.language) {
+                case 'python':
+                    const pythonSnippets = await import('../snippets/snippets-python.js');
+                    snippetsData = pythonSnippets.default;
+                    break;
+                case 'javascript':
+                    const jsSnippets = await import('../snippets/snippets-javascript.js');
+                    snippetsData = jsSnippets.default;
+                    break;
+                case 'r':
+                    const rSnippets = await import('../snippets/snippets-r.js');
+                    snippetsData = rSnippets.default;
+                    break;
+                default:
+                    console.warn(`No snippets available for language: ${this.language}`);
+                    this.snippets = new Map();
+                    return;
+            }
+            
+            if (snippetsData) {
+                this.snippets = new Map(Object.entries(snippetsData));
+            } else {
+                this.snippets = new Map();
+            }
         } catch (error) {
-            console.warn(`Could not load snippets from ${snippetsPath}:`, error);
+            console.warn(`Could not load snippets for ${this.language}:`, error);
             this.snippets = new Map();
         }
     }

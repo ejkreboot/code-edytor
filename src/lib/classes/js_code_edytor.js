@@ -1,4 +1,5 @@
 import { CodeEdytor } from './code_edytor.js';
+import { getWasmUrl } from "../wasm/index.js";
 
 export class JSCodeEdytor extends CodeEdytor {
     constructor() {
@@ -11,7 +12,8 @@ export class JSCodeEdytor extends CodeEdytor {
         await Parser.init();
         
         const parser = new Parser();
-        const JavaScript = await Parser.Language.load('/wasm/tree-sitter-javascript.wasm');
+        const jsWasmUrl = getWasmUrl('tree-sitter-javascript.wasm');
+        const JavaScript = await Parser.Language.load(jsWasmUrl);
         parser.setLanguage(JavaScript);
 
         return parser;
@@ -77,10 +79,6 @@ export class JSCodeEdytor extends CodeEdytor {
             // Fetch API
             'fetch', 'Response', 'Request'
         ];
-    }
-
-    getSnippetsPath() {
-        return '../snippets/snippets-javascript.json';
     }
 
     // Override to handle dot completions properly

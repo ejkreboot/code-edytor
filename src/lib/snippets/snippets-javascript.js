@@ -1,4 +1,4 @@
-{
+export default {
     "log": {
         "label": "log",
         "snippet": "console.log()",
@@ -385,4 +385,4 @@
         "snippet": ".textContent",
         "description": "Text content of element"
     }
-}
+};

@@ -1,4 +1,4 @@
-{
+export default {
   "if": {
     "label": "if condition:",
     "snippet": "if condition:\n\tpass",
@@ -94,4 +94,4 @@
     "snippet": "range(10)",
     "description": "Range function"
   }
-}
+};

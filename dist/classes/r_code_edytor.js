@@ -1,6 +1,7 @@
 import { CodeEdytor } from "./code_edytor.js";
 import BASE_SIG from "../signatures/r_base_signatures.json"; 
 import Parser from 'web-tree-sitter';
+import { getWasmUrl } from "../wasm/index.js";
 
 // R-specific implementation
 const R_KEYWORDS = [
@@ -14,10 +15,13 @@ export class RCodeEdytor extends CodeEdytor {
     }
 
     async makeParser() {
+        const treeSitterWasmUrl = getWasmUrl('tree-sitter.wasm');
         await Parser.init({
-            locateFile: (file) => `/wasm/tree-sitter.wasm` 
+            locateFile: (file) => treeSitterWasmUrl
         });
-        const R = await Parser.Language.load('/wasm/tree-sitter-r.wasm');
+        
+        const rWasmUrl = getWasmUrl('tree-sitter-r.wasm');
+        const R = await Parser.Language.load(rWasmUrl);
 
         const parser = new Parser();
         parser.setLanguage(R);

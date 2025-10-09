@@ -1,6 +1,22 @@
 <script>
-    import { onMount, createEventDispatcher } from "svelte";
+    import { onMount, onDestroy, createEventDispatcher } from "svelte";
+    import { generateFontCSS } from "../fonts/index.js";
     const dispatch = createEventDispatcher();
+    
+    // Inject font CSS when the component is created
+    let fontStyleElement;
+    if (typeof document !== 'undefined') {
+        fontStyleElement = document.createElement('style');
+        fontStyleElement.textContent = generateFontCSS();
+        document.head.appendChild(fontStyleElement);
+    }
+    
+    // Clean up the injected styles when component is destroyed
+    onDestroy(() => {
+        if (fontStyleElement && fontStyleElement.parentNode) {
+            fontStyleElement.parentNode.removeChild(fontStyleElement);
+        }
+    });
     
     /* USAGE exmple:
         <!-- R Code Editor -->
@@ -492,32 +508,6 @@
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
-    @font-face {
-        font-family: 'Fira Code VF';
-        src: url('woff2/FiraCode-VF.woff2') format('woff2-variations'),
-            url('woff/FiraCode-VF.woff') format('woff-variations');
-        /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
-        font-weight: 300 700;
-        font-style: normal;
-    }
-
-    @font-face {
-        font-family: 'Monaspace Neon VF';
-        src: url('woff2/Monaspace Neon Var.woff2') format('woff2-variations'),
-            url('woff/Monaspace Neon Var.woff') format('woff-variations');
-        /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
-        font-weight: 300 700;
-        font-style: normal;
-    }
-
-    @font-face {
-        font-family: 'Monaspace Argon VF';
-        src: url('woff2/Monaspace Argon Var.woff2') format('woff2-variations'),
-            url('woff/Monaspace Argon Var.woff') format('woff-variations');
-        /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
-        font-weight: 300 700;
-        font-style: normal;
-    }
 
     .code-editor-container {
         position: relative;

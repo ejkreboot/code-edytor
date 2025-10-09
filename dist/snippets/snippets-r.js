@@ -1,4 +1,4 @@
-{
+export default {
   "if": {
     "label": "if",
     "snippet": "if (condition) {\n\t# code\n}",
@@ -34,4 +34,4 @@
     "snippet": "data.frame(\n\tcol1 = values1,\n\tcol2 = values2\n)",
     "description": "create data frame"
   }
-}
+};
