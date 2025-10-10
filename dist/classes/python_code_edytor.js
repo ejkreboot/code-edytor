@@ -9,7 +9,12 @@ export class PythonCodeEdytor extends CodeEdytor {
     async makeParser() {
         // Initialize tree-sitter for Python
         const Parser = (await import('web-tree-sitter')).default;
-        await Parser.init();
+        await Parser.init({
+            locateFile: (file) => {
+                // Return the correct URL for each WASM file requested
+                return getWasmUrl(file);
+            }
+        });
         
         const parser = new Parser();
         const pythonWasmUrl = getWasmUrl('tree-sitter-python.wasm');
