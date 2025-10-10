@@ -1,7 +1,6 @@
 export class PythonCodeEdytor extends CodeEdytor {
     constructor();
     makeParser(): Promise<import("web-tree-sitter")>;
-    getKeywords(): string[];
     getBuiltinFunctions(): {
         print: {
             description: string;

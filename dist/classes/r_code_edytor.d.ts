@@ -1,7 +1,6 @@
 export class RCodeEdytor extends CodeEdytor {
     constructor();
     makeParser(): Promise<Parser>;
-    getKeywords(): string[];
     getBuiltinFunctions(): {
         "base::-.Date": string[];
         "-.Date": string[];
@@ -5654,6 +5653,8 @@ export class RCodeEdytor extends CodeEdytor {
         "grDevices::xyz.coords": string[];
         "xyz.coords": string[];
     };
+    shouldTriggerCompletion(char: any, position: any): boolean;
+    collectIdentifiers(tree: any, cursorIndex: any): Set<any>;
 }
 import { CodeEdytor } from "./code_edytor.js";
 import Parser from 'web-tree-sitter';

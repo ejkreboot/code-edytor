@@ -1,7 +1,7 @@
 export class JSCodeEdytor extends CodeEdytor {
     constructor();
     makeParser(): Promise<import("web-tree-sitter")>;
-    getKeywords(): string[];
     getBuiltinFunctions(): string[];
+    getCompletionPrefix(position: any): string;
 }
 import { CodeEdytor } from './code_edytor.js';
