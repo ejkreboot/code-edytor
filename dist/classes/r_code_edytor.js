@@ -15,9 +15,11 @@ export class RCodeEdytor extends CodeEdytor {
     }
 
     async makeParser() {
-        const treeSitterWasmUrl = getWasmUrl('tree-sitter.wasm');
         await Parser.init({
-            locateFile: (file) => treeSitterWasmUrl
+            locateFile: (file) => {
+                // Return the correct URL for each WASM file requested
+                return getWasmUrl(file);
+            }
         });
         
         const rWasmUrl = getWasmUrl('tree-sitter-r.wasm');
