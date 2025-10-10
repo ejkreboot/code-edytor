@@ -511,7 +511,7 @@
 
     .code-editor-container {
         position: relative;
-        border: 1px solid #ccc;
+        border: 0px solid #ccc;
         border-radius: 4px;
         background: white;
         display: flex;
