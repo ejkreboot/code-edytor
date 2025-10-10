@@ -9,7 +9,12 @@ export class JSCodeEdytor extends CodeEdytor {
     async makeParser() {
         // Initialize tree-sitter for JavaScript
         const Parser = (await import('web-tree-sitter')).default;
-        await Parser.init();
+        await Parser.init({
+            locateFile: (file) => {
+                // Return the correct URL for each WASM file requested
+                return getWasmUrl(file);
+            }
+        });
         
         const parser = new Parser();
         const jsWasmUrl = getWasmUrl('tree-sitter-javascript.wasm');
