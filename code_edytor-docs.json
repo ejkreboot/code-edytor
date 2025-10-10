@@ -1,0 +1,4061 @@
+Need to install the following packages:
+jsdoc@4.0.5
+Ok to proceed? (y) 
+[
+    {
+        "comment": "/**\n * Base class for language-specific code editors with syntax highlighting, \n * autocompletion, and snippet support using Tree-sitter parsers.\n * \n * This class provides the foundation for creating code editors for different\n * programming languages. It handles:\n * - Tree-sitter parser integration for syntax analysis\n * - Snippet management and completion\n * - Symbol-based autocompletion (keywords, variables, functions)\n * - Text manipulation and cursor position tracking\n * - Variable namespace integration for live completion\n * \n * @abstract\n * @example\n * // Extend this class for specific languages\n * class PythonCodeEdytor extends CodeEdytor {\n *   constructor() {\n *     super('python');\n *   }\n *   \n *   async makeParser() {\n *     // Implementation specific to Python\n *   }\n * }\n */",
+        "meta": {
+            "range": [
+                802,
+                22292
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 26,
+            "columnno": 0,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000002",
+                "name": "exports.CodeEdytor",
+                "type": "ClassDeclaration"
+            }
+        },
+        "classdesc": "Base class for language-specific code editors with syntax highlighting, \nautocompletion, and snippet support using Tree-sitter parsers.\n\nThis class provides the foundation for creating code editors for different\nprogramming languages. It handles:\n- Tree-sitter parser integration for syntax analysis\n- Snippet management and completion\n- Symbol-based autocompletion (keywords, variables, functions)\n- Text manipulation and cursor position tracking\n- Variable namespace integration for live completion",
+        "virtual": true,
+        "examples": [
+            "// Extend this class for specific languages\nclass PythonCodeEdytor extends CodeEdytor {\n  constructor() {\n    super('python');\n  }\n  \n  async makeParser() {\n    // Implementation specific to Python\n  }\n}"
+        ],
+        "name": "CodeEdytor",
+        "longname": "CodeEdytor",
+        "kind": "class",
+        "scope": "global",
+        "undocumented": true
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                809,
+                22292
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 26,
+            "columnno": 7,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000003",
+                "name": "CodeEdytor",
+                "type": "ClassDeclaration",
+                "paramnames": [
+                    "language"
+                ]
+            }
+        },
+        "undocumented": true,
+        "name": "CodeEdytor",
+        "longname": "CodeEdytor",
+        "kind": "class",
+        "scope": "global"
+    },
+    {
+        "comment": "/**\n     * Creates a new CodeEdytor instance.\n     * \n     * @param {string|null} language - The programming language identifier (e.g., 'python', 'javascript', 'r')\n     */",
+        "meta": {
+            "range": [
+                1009,
+                2108
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 32,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000006",
+                "name": "exports.CodeEdytor",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "language"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Creates a new CodeEdytor instance.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": "The programming language identifier (e.g., 'python', 'javascript', 'r')",
+                "name": "language",
+                "defaultvalue": null
+            }
+        ],
+        "name": "CodeEdytor",
+        "longname": "CodeEdytor#CodeEdytor",
+        "kind": "class",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "undocumented": true
+    },
+    {
+        "comment": "/**\n * Base class for language-specific code editors with syntax highlighting, \n * autocompletion, and snippet support using Tree-sitter parsers.\n * \n * This class provides the foundation for creating code editors for different\n * programming languages. It handles:\n * - Tree-sitter parser integration for syntax analysis\n * - Snippet management and completion\n * - Symbol-based autocompletion (keywords, variables, functions)\n * - Text manipulation and cursor position tracking\n * - Variable namespace integration for live completion\n * \n * @abstract\n * @example\n * // Extend this class for specific languages\n * class PythonCodeEdytor extends CodeEdytor {\n *   constructor() {\n *     super('python');\n *   }\n *   \n *   async makeParser() {\n *     // Implementation specific to Python\n *   }\n * }\n */",
+        "meta": {
+            "range": [
+                802,
+                22292
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 26,
+            "columnno": 0,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000002",
+                "name": "exports.CodeEdytor",
+                "type": "ClassDeclaration"
+            }
+        },
+        "name": "CodeEdytor",
+        "longname": "CodeEdytor",
+        "kind": "class",
+        "classdesc": "Base class for language-specific code editors with syntax highlighting, \nautocompletion, and snippet support using Tree-sitter parsers.\n\nThis class provides the foundation for creating code editors for different\nprogramming languages. It handles:\n- Tree-sitter parser integration for syntax analysis\n- Snippet management and completion\n- Symbol-based autocompletion (keywords, variables, functions)\n- Text manipulation and cursor position tracking\n- Variable namespace integration for live completion",
+        "virtual": true,
+        "examples": [
+            "// Extend this class for specific languages\nclass PythonCodeEdytor extends CodeEdytor {\n  constructor() {\n    super('python');\n  }\n  \n  async makeParser() {\n    // Implementation specific to Python\n  }\n}"
+        ],
+        "scope": "global",
+        "description": "Creates a new CodeEdytor instance.",
+        "memberof": "CodeEdytor",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": "The programming language identifier (e.g., 'python', 'javascript', 'r')",
+                "name": "language",
+                "defaultvalue": null
+            }
+        ]
+    },
+    {
+        "comment": "/** @type {Parser|null} Tree-sitter parser instance */",
+        "meta": {
+            "range": [
+                1111,
+                1129
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 34,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000014",
+                "name": "this.parser",
+                "type": "Literal",
+                "value": null,
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "Parser",
+                "null"
+            ]
+        },
+        "description": "Tree-sitter parser instance",
+        "name": "parser",
+        "longname": "CodeEdytor#parser",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/** @type {string} Current text content of the editor */",
+        "meta": {
+            "range": [
+                1213,
+                1230
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 37,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000020",
+                "name": "this.content",
+                "type": "Literal",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "string"
+            ]
+        },
+        "description": "Current text content of the editor",
+        "name": "content",
+        "longname": "CodeEdytor#content",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/** @type {string} Shadow content for comparison (currently unused) */",
+        "meta": {
+            "range": [
+                1328,
+                1344
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 40,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000026",
+                "name": "this.shadow",
+                "type": "Literal",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "string"
+            ]
+        },
+        "description": "Shadow content for comparison (currently unused)",
+        "name": "shadow",
+        "longname": "CodeEdytor#shadow",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/** @type {{row: number, column: number}} Current cursor position */",
+        "meta": {
+            "range": [
+                1440,
+                1475
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 43,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000032",
+                "name": "this.cursor",
+                "type": "ObjectExpression",
+                "value": "{\"row\":0,\"column\":0}",
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "Object"
+            ]
+        },
+        "description": "Current cursor position",
+        "name": "cursor",
+        "longname": "CodeEdytor#cursor",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1456,
+                1462
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 43,
+            "columnno": 24,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000037",
+                "name": "row",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "CodeEdytor#cursor.row",
+        "kind": "member",
+        "memberof": "CodeEdytor#cursor",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1464,
+                1473
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 43,
+            "columnno": 32,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000039",
+                "name": "column",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "CodeEdytor#cursor.column",
+        "kind": "member",
+        "memberof": "CodeEdytor#cursor",
+        "scope": "static"
+    },
+    {
+        "comment": "/** @type {Object|null} Current text selection (currently unused) */",
+        "meta": {
+            "range": [
+                1571,
+                1592
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 46,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000042",
+                "name": "this.selection",
+                "type": "Literal",
+                "value": null,
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "Object",
+                "null"
+            ]
+        },
+        "description": "Current text selection (currently unused)",
+        "name": "selection",
+        "longname": "CodeEdytor#selection",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/** @type {Tree|null} Current syntax tree from Tree-sitter */",
+        "meta": {
+            "range": [
+                1681,
+                1697
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 49,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000048",
+                "name": "this.tree",
+                "type": "Literal",
+                "value": null,
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "Tree",
+                "null"
+            ]
+        },
+        "description": "Current syntax tree from Tree-sitter",
+        "name": "tree",
+        "longname": "CodeEdytor#tree",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/** @type {string|null} Programming language identifier */",
+        "meta": {
+            "range": [
+                1783,
+                1807
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 52,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000054",
+                "name": "this.language",
+                "type": "Identifier",
+                "value": "language",
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "string",
+                "null"
+            ]
+        },
+        "description": "Programming language identifier",
+        "name": "language",
+        "longname": "CodeEdytor#language",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/** @type {Map<string, Object>} Map of snippet triggers to snippet objects */",
+        "meta": {
+            "range": [
+                1912,
+                1937
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 55,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000060",
+                "name": "this.snippets",
+                "type": "NewExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "Map.<string, Object>"
+            ]
+        },
+        "description": "Map of snippet triggers to snippet objects",
+        "name": "snippets",
+        "longname": "CodeEdytor#snippets",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/** @type {string[]} List of available variables from the runtime namespace */",
+        "meta": {
+            "range": [
+                2043,
+                2071
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 58,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000067",
+                "name": "this.availableVariables",
+                "type": "ArrayExpression",
+                "value": "[]",
+                "paramnames": []
+            }
+        },
+        "type": {
+            "names": [
+                "Array.<string>"
+            ]
+        },
+        "description": "List of available variables from the runtime namespace",
+        "name": "availableVariables",
+        "longname": "CodeEdytor#availableVariables",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/**\n     * Initializes the code editor by setting up the parser and loading snippets.\n     * Called automatically during construction.\n     * \n     * @async\n     * @private\n     */",
+        "meta": {
+            "range": [
+                2299,
+                2401
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 70,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000077",
+                "name": "CodeEdytor#init",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Initializes the code editor by setting up the parser and loading snippets.\nCalled automatically during construction.",
+        "async": true,
+        "access": "private",
+        "name": "init",
+        "longname": "CodeEdytor#init",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2322,
+                2359
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 71,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000082",
+                "name": "this.parser",
+                "type": "AwaitExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "parser",
+        "longname": "CodeEdytor#parser",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/**\n     * Creates and configures a Tree-sitter parser for the specific language.\n     * Must be implemented by subclasses.\n     * \n     * @abstract\n     * @async\n     * @returns {Promise<Parser>} Configured Tree-sitter parser instance\n     * @throws {Error} If not implemented by subclass\n     */",
+        "meta": {
+            "range": [
+                2709,
+                2808
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 84,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000097",
+                "name": "CodeEdytor#makeParser",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Creates and configures a Tree-sitter parser for the specific language.\nMust be implemented by subclasses.",
+        "virtual": true,
+        "async": true,
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Promise.<Parser>"
+                    ]
+                },
+                "description": "Configured Tree-sitter parser instance"
+            }
+        ],
+        "exceptions": [
+            {
+                "type": {
+                    "names": [
+                        "Error"
+                    ]
+                },
+                "description": "If not implemented by subclass"
+            }
+        ],
+        "name": "makeParser",
+        "longname": "CodeEdytor#makeParser",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Returns an array of language-specific keywords for autocompletion.\n     * Must be implemented by subclasses.\n     * \n     * @abstract\n     * @returns {string[]} Array of language keywords\n     * @throws {Error} If not implemented by subclass\n     */",
+        "meta": {
+            "range": [
+                3079,
+                3174
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 96,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000105",
+                "name": "CodeEdytor#getKeywords",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Returns an array of language-specific keywords for autocompletion.\nMust be implemented by subclasses.",
+        "virtual": true,
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Array.<string>"
+                    ]
+                },
+                "description": "Array of language keywords"
+            }
+        ],
+        "exceptions": [
+            {
+                "type": {
+                    "names": [
+                        "Error"
+                    ]
+                },
+                "description": "If not implemented by subclass"
+            }
+        ],
+        "name": "getKeywords",
+        "longname": "CodeEdytor#getKeywords",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Returns an object mapping builtin function names to their metadata.\n     * Must be implemented by subclasses.\n     * \n     * @abstract\n     * @returns {Object<string, Object>} Map of builtin functions\n     * @throws {Error} If not implemented by subclass\n     */",
+        "meta": {
+            "range": [
+                3458,
+                3569
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 108,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000113",
+                "name": "CodeEdytor#getBuiltinFunctions",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Returns an object mapping builtin function names to their metadata.\nMust be implemented by subclasses.",
+        "virtual": true,
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Object.<string, Object>"
+                    ]
+                },
+                "description": "Map of builtin functions"
+            }
+        ],
+        "exceptions": [
+            {
+                "type": {
+                    "names": [
+                        "Error"
+                    ]
+                },
+                "description": "If not implemented by subclass"
+            }
+        ],
+        "name": "getBuiltinFunctions",
+        "longname": "CodeEdytor#getBuiltinFunctions",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Loads code snippets for the current language from bundled JavaScript modules.\n     * Snippets are loaded dynamically based on the language identifier.\n     * \n     * @async\n     * @private\n     */",
+        "meta": {
+            "range": [
+                3787,
+                5168
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 119,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000121",
+                "name": "CodeEdytor#loadSnippets",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Loads code snippets for the current language from bundled JavaScript modules.\nSnippets are loaded dynamically based on the language identifier.",
+        "async": true,
+        "access": "private",
+        "name": "loadSnippets",
+        "longname": "CodeEdytor#loadSnippets",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3885,
+                3904
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 123,
+            "columnno": 16,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000134",
+                "name": "snippetsData",
+                "type": "Literal",
+                "value": null
+            }
+        },
+        "undocumented": true,
+        "name": "snippetsData",
+        "longname": "<anonymous>~snippetsData",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4061,
+                4124
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 128,
+            "columnno": 26,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000144",
+                "name": "pythonSnippets",
+                "type": "AwaitExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "pythonSnippets",
+        "longname": "<anonymous>~pythonSnippets",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4146,
+                4183
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 129,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000149",
+                "name": "snippetsData",
+                "type": "MemberExpression",
+                "funcscope": "<anonymous>",
+                "value": "pythonSnippets.default",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippetsData",
+        "longname": "<anonymous>~snippetsData",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4273,
+                4336
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 132,
+            "columnno": 26,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000158",
+                "name": "jsSnippets",
+                "type": "AwaitExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "jsSnippets",
+        "longname": "<anonymous>~jsSnippets",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4358,
+                4391
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 133,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000163",
+                "name": "snippetsData",
+                "type": "MemberExpression",
+                "funcscope": "<anonymous>",
+                "value": "jsSnippets.default",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippetsData",
+        "longname": "<anonymous>~snippetsData",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4472,
+                4525
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 136,
+            "columnno": 26,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000172",
+                "name": "rSnippets",
+                "type": "AwaitExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "rSnippets",
+        "longname": "<anonymous>~rSnippets",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4547,
+                4579
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 137,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000177",
+                "name": "snippetsData",
+                "type": "MemberExpression",
+                "funcscope": "<anonymous>",
+                "value": "rSnippets.default",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippetsData",
+        "longname": "<anonymous>~snippetsData",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4743,
+                4768
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 141,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000196",
+                "name": "this.snippets",
+                "type": "NewExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippets",
+        "longname": "CodeEdytor#snippets",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4873,
+                4926
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 146,
+            "columnno": 16,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000207",
+                "name": "this.snippets",
+                "type": "NewExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippets",
+        "longname": "CodeEdytor#snippets",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4965,
+                4990
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 148,
+            "columnno": 16,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000220",
+                "name": "this.snippets",
+                "type": "NewExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippets",
+        "longname": "CodeEdytor#snippets",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5126,
+                5151
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 152,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000240",
+                "name": "this.snippets",
+                "type": "NewExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippets",
+        "longname": "CodeEdytor#snippets",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/**\n     * Gets snippet-based completions that match the given prefix.\n     * \n     * @param {string} prefix - The text prefix to match against snippet triggers\n     * @param {{row: number, column: number}} position - Current cursor position for indentation context\n     * @returns {Array<Object>} Array of completion objects with label, type, insertText, description, and trigger\n     */",
+        "meta": {
+            "range": [
+                5567,
+                6211
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 163,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000246",
+                "name": "CodeEdytor#getSnippetCompletions",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "prefix",
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Gets snippet-based completions that match the given prefix.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The text prefix to match against snippet triggers",
+                "name": "prefix"
+            },
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position for indentation context",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Array.<Object>"
+                    ]
+                },
+                "description": "Array of completion objects with label, type, insertText, description, and trigger"
+            }
+        ],
+        "name": "getSnippetCompletions",
+        "longname": "CodeEdytor#getSnippetCompletions",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5631,
+                5647
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 164,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000253",
+                "name": "completions",
+                "type": "ArrayExpression",
+                "value": "[]"
+            }
+        },
+        "undocumented": true,
+        "name": "completions",
+        "longname": "<anonymous>~completions",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5845,
+                5876
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 169,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000283",
+                "name": "label",
+                "type": "LogicalExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "label",
+        "longname": "label",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5898,
+                5913
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 170,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000289",
+                "name": "type",
+                "type": "Literal",
+                "value": "snippet"
+            }
+        },
+        "undocumented": true,
+        "name": "type",
+        "longname": "type",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5935,
+                6008
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 171,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000291",
+                "name": "insertText",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "insertText",
+        "longname": "insertText",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6030,
+                6086
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 172,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000300",
+                "name": "description",
+                "type": "LogicalExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "description",
+        "longname": "description",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6108,
+                6124
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 173,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000309",
+                "name": "trigger",
+                "type": "Identifier",
+                "value": "trigger"
+            }
+        },
+        "undocumented": true,
+        "name": "trigger",
+        "longname": "trigger",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "/**\n     * Processes raw snippet text by converting escape sequences to actual characters.\n     * \n     * @param {string} snippetText - Raw snippet text with escape sequences\n     * @returns {string} Processed snippet text with actual newlines, tabs, etc.\n     */",
+        "meta": {
+            "range": [
+                6485,
+                6654
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 187,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000313",
+                "name": "CodeEdytor#processSnippet",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "snippetText"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Processes raw snippet text by converting escape sequences to actual characters.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "Raw snippet text with escape sequences",
+                "name": "snippetText"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "Processed snippet text with actual newlines, tabs, etc."
+            }
+        ],
+        "name": "processSnippet",
+        "longname": "CodeEdytor#processSnippet",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/**\n     * Determines the current indentation level at the given position.\n     * Used to maintain proper indentation when inserting snippets.\n     * \n     * @param {{row: number, column: number}} position - Cursor position to analyze\n     * @returns {string} The indentation string (spaces/tabs) for the current line\n     */",
+        "meta": {
+            "range": [
+                6990,
+                7510
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 201,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000335",
+                "name": "CodeEdytor#getCurrentIndentation",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Determines the current indentation level at the given position.\nUsed to maintain proper indentation when inserting snippets.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Cursor position to analyze",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The indentation string (spaces/tabs) for the current line"
+            }
+        ],
+        "name": "getCurrentIndentation",
+        "longname": "CodeEdytor#getCurrentIndentation",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7038,
+                7119
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 202,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000341",
+                "name": "textIndex",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "textIndex",
+        "longname": "<anonymous>~textIndex",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7134,
+                7155
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 204,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000357",
+                "name": "lineStart",
+                "type": "Identifier",
+                "value": "textIndex"
+            }
+        },
+        "undocumented": true,
+        "name": "lineStart",
+        "longname": "<anonymous>~lineStart",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7277,
+                7293
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 209,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000379",
+                "name": "indentation",
+                "type": "Literal",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "indentation",
+        "longname": "<anonymous>~indentation",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7307,
+                7320
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 210,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000383",
+                "name": "i",
+                "type": "Identifier",
+                "value": "lineStart"
+            }
+        },
+        "undocumented": true,
+        "name": "i",
+        "longname": "<anonymous>~i",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7409,
+                7439
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 212,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000406",
+                "name": "indentation",
+                "type": "MemberExpression",
+                "funcscope": "<anonymous>",
+                "value": "this.content[undefined]",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "indentation",
+        "longname": "<anonymous>~indentation",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "/**\n     * Applies the current line's indentation to all lines in a multi-line snippet.\n     * The first line is not indented as it continues the current line.\n     * \n     * @param {string} snippetText - The processed snippet text\n     * @param {string} indentation - The indentation string to apply\n     * @param {{row: number, column: number}} position - Current cursor position (unused but kept for consistency)\n     * @returns {string} Snippet text with proper indentation applied\n     */",
+        "meta": {
+            "range": [
+                8014,
+                8517
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 228,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000418",
+                "name": "CodeEdytor#applyIndentationToSnippet",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "snippetText",
+                    "indentation",
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Applies the current line's indentation to all lines in a multi-line snippet.\nThe first line is not indented as it continues the current line.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The processed snippet text",
+                "name": "snippetText"
+            },
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The indentation string to apply",
+                "name": "indentation"
+            },
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position (unused but kept for consistency)",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "Snippet text with proper indentation applied"
+            }
+        ],
+        "name": "applyIndentationToSnippet",
+        "longname": "CodeEdytor#applyIndentationToSnippet",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8202,
+                8233
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 233,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000439",
+                "name": "lines",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "lines",
+        "longname": "<anonymous>~lines",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Processes a snippet and applies proper indentation based on the cursor position.\n     * This is the main entry point for snippet processing.\n     * \n     * @param {string} snippetText - Raw snippet text from the snippets file\n     * @param {{row: number, column: number}} position - Current cursor position\n     * @returns {string} Fully processed snippet ready for insertion\n     */",
+        "meta": {
+            "range": [
+                8922,
+                9265
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 250,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000469",
+                "name": "CodeEdytor#processSnippetWithIndentation",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "snippetText",
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Processes a snippet and applies proper indentation based on the cursor position.\nThis is the main entry point for snippet processing.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "Raw snippet text from the snippets file",
+                "name": "snippetText"
+            },
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "Fully processed snippet ready for insertion"
+            }
+        ],
+        "name": "processSnippetWithIndentation",
+        "longname": "CodeEdytor#processSnippetWithIndentation",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9033,
+                9077
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 252,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000476",
+                "name": "processed",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "processed",
+        "longname": "<anonymous>~processed",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9127,
+                9177
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 254,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000484",
+                "name": "indentation",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "indentation",
+        "longname": "<anonymous>~indentation",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Checks if there are any snippets that match the given prefix.\n     * Used to determine if autocompletion should be triggered.\n     * \n     * @param {string} prefix - The text prefix to check\n     * @returns {boolean} True if at least one snippet matches the prefix\n     */",
+        "meta": {
+            "range": [
+                9559,
+                9843
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 265,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000499",
+                "name": "CodeEdytor#hasMatchingSnippets",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "prefix"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Checks if there are any snippets that match the given prefix.\nUsed to determine if autocompletion should be triggered.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The text prefix to check",
+                "name": "prefix"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "boolean"
+                    ]
+                },
+                "description": "True if at least one snippet matches the prefix"
+            }
+        ],
+        "name": "hasMatchingSnippets",
+        "longname": "CodeEdytor#hasMatchingSnippets",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9654,
+                9661
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 267,
+            "columnno": 19,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000514",
+                "name": "trigger"
+            }
+        },
+        "undocumented": true,
+        "name": "trigger",
+        "longname": "<anonymous>~trigger",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Recursively collects all identifier nodes from the syntax tree.\n     * Used to provide context-aware autocompletion of variables and functions.\n     * \n     * @param {Tree} tree - Tree-sitter syntax tree\n     * @param {number} cursorIndex - Current cursor position in text (unused but kept for future use)\n     * @returns {Set<string>} Set of unique identifier names found in the code\n     */",
+        "meta": {
+            "range": [
+                10257,
+                10701
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 283,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000540",
+                "name": "CodeEdytor#collectIdentifiers",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "tree",
+                    "cursorIndex"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Recursively collects all identifier nodes from the syntax tree.\nUsed to provide context-aware autocompletion of variables and functions.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Tree"
+                    ]
+                },
+                "description": "Tree-sitter syntax tree",
+                "name": "tree"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "description": "Current cursor position in text (unused but kept for future use)",
+                "name": "cursorIndex"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Set.<string>"
+                    ]
+                },
+                "description": "Set of unique identifier names found in the code"
+            }
+        ],
+        "name": "collectIdentifiers",
+        "longname": "CodeEdytor#collectIdentifiers",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10311,
+                10334
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 284,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000547",
+                "name": "identifiers",
+                "type": "NewExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "identifiers",
+        "longname": "<anonymous>~identifiers",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10401,
+                10629
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 288,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000556",
+                "name": "walk",
+                "type": "FunctionDeclaration",
+                "paramnames": [
+                    "node"
+                ]
+            },
+            "vars": {
+                "child": "<anonymous>~walk~child"
+            }
+        },
+        "undocumented": true,
+        "name": "walk",
+        "longname": "<anonymous>~walk",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10551,
+                10556
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 293,
+            "columnno": 23,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000577",
+                "name": "child"
+            }
+        },
+        "undocumented": true,
+        "name": "child",
+        "longname": "<anonymous>~walk~child",
+        "kind": "constant",
+        "memberof": "<anonymous>~walk",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Updates the editor content and re-parses the syntax tree.\n     * This should be called whenever the text content changes.\n     * \n     * @param {string} newText - The new complete text content\n     */",
+        "meta": {
+            "range": [
+                10923,
+                11084
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 308,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000595",
+                "name": "CodeEdytor#onInput",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "newText"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Updates the editor content and re-parses the syntax tree.\nThis should be called whenever the text content changes.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The new complete text content",
+                "name": "newText"
+            }
+        ],
+        "name": "onInput",
+        "longname": "CodeEdytor#onInput",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10950,
+                10972
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 309,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000601",
+                "name": "this.content",
+                "type": "Identifier",
+                "value": "newText",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "content",
+        "longname": "CodeEdytor#content",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11013,
+                11067
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 311,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000612",
+                "name": "this.tree",
+                "type": "CallExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "tree",
+        "longname": "CodeEdytor#tree",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/**\n     * Sets the list of available variables from the runtime namespace.\n     * These variables will be included in autocompletion suggestions.\n     * \n     * @param {string[]|any} variables - Array of variable names or any value that will be converted to array\n     */",
+        "meta": {
+            "range": [
+                11367,
+                11484
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 321,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000628",
+                "name": "CodeEdytor#setAvailableVariables",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "variables"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Sets the list of available variables from the runtime namespace.\nThese variables will be included in autocompletion suggestions.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Array.<string>",
+                        "any"
+                    ]
+                },
+                "description": "Array of variable names or any value that will be converted to array",
+                "name": "variables"
+            }
+        ],
+        "name": "setAvailableVariables",
+        "longname": "CodeEdytor#setAvailableVariables",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11410,
+                11477
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 322,
+            "columnno": 8,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000634",
+                "name": "this.availableVariables",
+                "type": "ConditionalExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "availableVariables",
+        "longname": "CodeEdytor#availableVariables",
+        "kind": "member",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "/**\n     * Gets the current list of available variables from the runtime namespace.\n     * \n     * @returns {string[]} Array of available variable names\n     */",
+        "meta": {
+            "range": [
+                11655,
+                11726
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 330,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000646",
+                "name": "CodeEdytor#getAvailableVariables",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Gets the current list of available variables from the runtime namespace.",
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Array.<string>"
+                    ]
+                },
+                "description": "Array of available variable names"
+            }
+        ],
+        "name": "getAvailableVariables",
+        "longname": "CodeEdytor#getAvailableVariables",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Converts a text index (character position) to row/column coordinates.\n     * \n     * @param {string} text - The text to analyze\n     * @param {number} index - Character index in the text\n     * @returns {{row: number, column: number}} Position as row/column coordinates (0-based)\n     */",
+        "meta": {
+            "range": [
+                12035,
+                12249
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 341,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000654",
+                "name": "CodeEdytor#textIndexToPosition",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "text",
+                    "index"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Converts a text index (character position) to row/column coordinates.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The text to analyze",
+                "name": "text"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "description": "Character index in the text",
+                "name": "index"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Position as row/column coordinates (0-based)"
+            }
+        ],
+        "name": "textIndexToPosition",
+        "longname": "CodeEdytor#textIndexToPosition",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12084,
+                12128
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 342,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000661",
+                "name": "lines",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "lines",
+        "longname": "<anonymous>~lines",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12159,
+                12180
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 344,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000675",
+                "name": "row",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "row",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12194,
+                12232
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 345,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000681",
+                "name": "column",
+                "type": "MemberExpression",
+                "value": "lines[undefined].length"
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "column",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "/**\n     * Converts row/column coordinates to a text index (character position).\n     * \n     * @param {string} text - The text to analyze\n     * @param {number} row - Row number (0-based)\n     * @param {number} column - Column number (0-based)\n     * @returns {number} Character index in the text\n     */",
+        "meta": {
+            "range": [
+                12565,
+                12825
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 357,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000691",
+                "name": "CodeEdytor#positionToTextIndex",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "text",
+                    "row",
+                    "column"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Converts row/column coordinates to a text index (character position).",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The text to analyze",
+                "name": "text"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "description": "Row number (0-based)",
+                "name": "row"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "description": "Column number (0-based)",
+                "name": "column"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "description": "Character index in the text"
+            }
+        ],
+        "name": "positionToTextIndex",
+        "longname": "CodeEdytor#positionToTextIndex",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12620,
+                12644
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 358,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000699",
+                "name": "lines",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "lines",
+        "longname": "<anonymous>~lines",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12658,
+                12667
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 359,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000707",
+                "name": "index",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "index",
+        "longname": "<anonymous>~index",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12686,
+                12691
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 360,
+            "columnno": 17,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000712",
+                "name": "i",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "i",
+        "longname": "<anonymous>~i",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12721,
+                12749
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 361,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000722",
+                "name": "index",
+                "type": "BinaryExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "index",
+        "longname": "<anonymous>~index",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "/**\n     * Determines if autocompletion should be triggered based on the character typed and cursor position.\n     * \n     * @param {string} char - The character that was just typed\n     * @param {{row: number, column: number}} position - Current cursor position\n     * @returns {boolean} True if autocompletion should be triggered\n     */",
+        "meta": {
+            "range": [
+                13175,
+                14434
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 373,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000735",
+                "name": "CodeEdytor#shouldTriggerCompletion",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "char",
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Determines if autocompletion should be triggered based on the character typed and cursor position.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The character that was just typed",
+                "name": "char"
+            },
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "boolean"
+                    ]
+                },
+                "description": "True if autocompletion should be triggered"
+            }
+        ],
+        "name": "shouldTriggerCompletion",
+        "longname": "CodeEdytor#shouldTriggerCompletion",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13277,
+                13315
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 375,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000742",
+                "name": "basicTrigger",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "basicTrigger",
+        "longname": "<anonymous>~basicTrigger",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13331,
+                13391
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 376,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000750",
+                "name": "spaceSnippetTrigger",
+                "type": "LogicalExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "spaceSnippetTrigger",
+        "longname": "<anonymous>~spaceSnippetTrigger",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13536,
+                13542
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 380,
+            "columnno": 16,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000769",
+                "name": "prefix"
+            }
+        },
+        "undocumented": true,
+        "name": "prefix",
+        "longname": "<anonymous>~prefix",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13678,
+                13718
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 383,
+            "columnno": 16,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000775",
+                "name": "prefix",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "prefix",
+        "longname": "<anonymous>~prefix",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13818,
+                13861
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 386,
+            "columnno": 16,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000784",
+                "name": "prefix",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "prefix",
+        "longname": "<anonymous>~prefix",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                14290,
+                14336
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 397,
+            "columnno": 22,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000808",
+                "name": "hasSnippets",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "hasSnippets",
+        "longname": "<anonymous>~hasSnippets",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Gets the text prefix before the cursor for symbol completion.\n     * Includes letters, numbers, underscores, and dots.\n     * \n     * @param {{row: number, column: number}} position - Current cursor position\n     * @returns {string} The prefix text for completion matching\n     */",
+        "meta": {
+            "range": [
+                14736,
+                15107
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 412,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000819",
+                "name": "CodeEdytor#getCompletionPrefix",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Gets the text prefix before the cursor for symbol completion.\nIncludes letters, numbers, underscores, and dots.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The prefix text for completion matching"
+            }
+        ],
+        "name": "getCompletionPrefix",
+        "longname": "CodeEdytor#getCompletionPrefix",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                14782,
+                14863
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 413,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000825",
+                "name": "textIndex",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "textIndex",
+        "longname": "<anonymous>~textIndex",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                14877,
+                14894
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 414,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000841",
+                "name": "start",
+                "type": "Identifier",
+                "value": "textIndex"
+            }
+        },
+        "undocumented": true,
+        "name": "start",
+        "longname": "<anonymous>~start",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                15028,
+                15077
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 419,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000865",
+                "name": "prefix",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "prefix",
+        "longname": "<anonymous>~prefix",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Gets the text prefix before the cursor for snippet completion.\n     * Used when space is pressed to trigger snippet completion.\n     * Excludes whitespace and only includes word characters.\n     * \n     * @param {{row: number, column: number}} position - Current cursor position\n     * @returns {string} The prefix text for snippet matching\n     */",
+        "meta": {
+            "range": [
+                15477,
+                16006
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 431,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000877",
+                "name": "CodeEdytor#getSnippetPrefix",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Gets the text prefix before the cursor for snippet completion.\nUsed when space is pressed to trigger snippet completion.\nExcludes whitespace and only includes word characters.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The prefix text for snippet matching"
+            }
+        ],
+        "name": "getSnippetPrefix",
+        "longname": "CodeEdytor#getSnippetPrefix",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                15520,
+                15601
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 432,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000883",
+                "name": "textIndex",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "textIndex",
+        "longname": "<anonymous>~textIndex",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                15657,
+                15672
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 435,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000899",
+                "name": "end",
+                "type": "Identifier",
+                "value": "textIndex"
+            }
+        },
+        "undocumented": true,
+        "name": "end",
+        "longname": "<anonymous>~end",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                15821,
+                15832
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 441,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000923",
+                "name": "start",
+                "type": "Identifier",
+                "value": "end"
+            }
+        },
+        "undocumented": true,
+        "name": "start",
+        "longname": "<anonymous>~start",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Gets the text suffix after the cursor that would be part of a symbol.\n     * Used for determining how much text to replace during completion.\n     * \n     * @param {{row: number, column: number}} position - Current cursor position\n     * @returns {string} The suffix text that should be replaced\n     */",
+        "meta": {
+            "range": [
+                16331,
+                16676
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 456,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000955",
+                "name": "CodeEdytor#getCompletionSuffix",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Gets the text suffix after the cursor that would be part of a symbol.\nUsed for determining how much text to replace during completion.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The suffix text that should be replaced"
+            }
+        ],
+        "name": "getCompletionSuffix",
+        "longname": "CodeEdytor#getCompletionSuffix",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                16377,
+                16458
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 457,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000961",
+                "name": "textIndex",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "textIndex",
+        "longname": "<anonymous>~textIndex",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                16473,
+                16488
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 459,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100000977",
+                "name": "end",
+                "type": "Identifier",
+                "value": "textIndex"
+            }
+        },
+        "undocumented": true,
+        "name": "end",
+        "longname": "<anonymous>~end",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Gets all available completions (snippets and symbols) for the given position.\n     * \n     * @param {{row: number, column: number}} position - Current cursor position\n     * @param {boolean} [prioritizeSnippets=false] - Whether to prioritize snippet completions over symbol completions\n     * @returns {Promise<Array<Object>>} Array of completion objects\n     */",
+        "meta": {
+            "range": [
+                17060,
+                18226
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 474,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001011",
+                "name": "CodeEdytor#getCompletions",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "position",
+                    "prioritizeSnippets"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Gets all available completions (snippets and symbols) for the given position.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            },
+            {
+                "type": {
+                    "names": [
+                        "boolean"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": false,
+                "description": "Whether to prioritize snippet completions over symbol completions",
+                "name": "prioritizeSnippets"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Promise.<Array.<Object>>"
+                    ]
+                },
+                "description": "Array of completion objects"
+            }
+        ],
+        "name": "getCompletions",
+        "longname": "CodeEdytor#getCompletions",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "async": true
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17133,
+                17139
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 475,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001020",
+                "name": "prefix"
+            }
+        },
+        "undocumented": true,
+        "name": "prefix",
+        "longname": "<anonymous>~prefix",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17141,
+                17159
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 475,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001022",
+                "name": "snippetCompletions"
+            }
+        },
+        "undocumented": true,
+        "name": "snippetCompletions",
+        "longname": "<anonymous>~snippetCompletions",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17161,
+                17178
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 475,
+            "columnno": 40,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001024",
+                "name": "symbolCompletions"
+            }
+        },
+        "undocumented": true,
+        "name": "symbolCompletions",
+        "longname": "<anonymous>~symbolCompletions",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17194,
+                17275
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 476,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001027",
+                "name": "textIndex",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "textIndex",
+        "longname": "<anonymous>~textIndex",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17384,
+                17431
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 479,
+            "columnno": 18,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001056",
+                "name": "snippetPrefix",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "snippetPrefix",
+        "longname": "<anonymous>~snippetPrefix",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17451,
+                17500
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 480,
+            "columnno": 18,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001064",
+                "name": "symbolPrefix",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "symbolPrefix",
+        "longname": "<anonymous>~symbolPrefix",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17514,
+                17586
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 481,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001072",
+                "name": "snippetCompletions",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippetCompletions",
+        "longname": "<anonymous>~snippetCompletions",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17600,
+                17725
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 482,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001081",
+                "name": "symbolCompletions",
+                "type": "ConditionalExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "symbolCompletions",
+        "longname": "<anonymous>~symbolCompletions",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17886,
+                17929
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 487,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001108",
+                "name": "prefix",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "prefix",
+        "longname": "<anonymous>~prefix",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                17989,
+                18064
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 489,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001124",
+                "name": "symbolCompletions",
+                "type": "AwaitExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "symbolCompletions",
+        "longname": "<anonymous>~symbolCompletions",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                18078,
+                18143
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 490,
+            "columnno": 12,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001137",
+                "name": "snippetCompletions",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "snippetCompletions",
+        "longname": "<anonymous>~snippetCompletions",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "/**\n     * Gets completions with labels trimmed to show only the text that would be inserted.\n     * Used by the UI to display clean completion options.\n     * \n     * @param {{row: number, column: number}} position - Current cursor position\n     * @param {boolean} [prioritizeSnippets=false] - Whether to prioritize snippet completions\n     * @returns {Promise<Array<Object>>} Array of trimmed completion objects\n     */",
+        "meta": {
+            "range": [
+                18658,
+                19747
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 503,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001151",
+                "name": "CodeEdytor#getTrimmedCompletions",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "position",
+                    "prioritizeSnippets"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Gets completions with labels trimmed to show only the text that would be inserted.\nUsed by the UI to display clean completion options.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            },
+            {
+                "type": {
+                    "names": [
+                        "boolean"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": false,
+                "description": "Whether to prioritize snippet completions",
+                "name": "prioritizeSnippets"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Promise.<Array.<Object>>"
+                    ]
+                },
+                "description": "Array of trimmed completion objects"
+            }
+        ],
+        "name": "getTrimmedCompletions",
+        "longname": "CodeEdytor#getTrimmedCompletions",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance",
+        "async": true
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                18771,
+                18843
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 505,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001160",
+                "name": "allCompletions",
+                "type": "AwaitExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "allCompletions",
+        "longname": "<anonymous>~allCompletions",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                18909,
+                18952
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 507,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001178",
+                "name": "prefix",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "prefix",
+        "longname": "<anonymous>~prefix",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                18968,
+                19041
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 508,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001186",
+                "name": "snippetPrefix",
+                "type": "ConditionalExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "snippetPrefix",
+        "longname": "<anonymous>~snippetPrefix",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19147,
+                19237
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 512,
+            "columnno": 22,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001212",
+                "name": "label",
+                "type": "ConditionalExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "label",
+        "longname": "<anonymous>~label",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19261,
+                19333
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 513,
+            "columnno": 22,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001235",
+                "name": "totalReplaceLength",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "totalReplaceLength",
+        "longname": "<anonymous>~totalReplaceLength",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19396,
+                19408
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 515,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001247",
+                "name": "label",
+                "type": "Identifier",
+                "value": "label"
+            }
+        },
+        "undocumented": true,
+        "name": "label",
+        "longname": "label",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19430,
+                19442
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 516,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001249",
+                "name": "type",
+                "type": "MemberExpression",
+                "value": "c.type"
+            }
+        },
+        "undocumented": true,
+        "name": "type",
+        "longname": "type",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19464,
+                19490
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 517,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001253",
+                "name": "description",
+                "type": "MemberExpression",
+                "value": "c.description"
+            }
+        },
+        "undocumented": true,
+        "name": "description",
+        "longname": "description",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19512,
+                19545
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 518,
+            "columnno": 20,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001257",
+                "name": "replaceLength",
+                "type": "Identifier",
+                "value": "totalReplaceLength"
+            }
+        },
+        "undocumented": true,
+        "name": "replaceLength",
+        "longname": "replaceLength",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19660,
+                19695
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 522,
+            "columnno": 21,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001270",
+                "name": "label",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "label",
+        "longname": "label",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                19697,
+                19709
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 522,
+            "columnno": 58,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001280",
+                "name": "kind",
+                "type": "MemberExpression",
+                "value": "c.kind"
+            }
+        },
+        "undocumented": true,
+        "name": "kind",
+        "longname": "kind",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "/**\n     * Determines if snippet completions should be prioritized over symbol completions.\n     * Snippets are prioritized when the user is likely starting a new statement.\n     * \n     * @param {string} char - The character that was just typed\n     * @param {{row: number, column: number}} position - Current cursor position\n     * @returns {boolean} True if snippets should be prioritized\n     */",
+        "meta": {
+            "range": [
+                20157,
+                20835
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 535,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001285",
+                "name": "CodeEdytor#shouldPrioritizeSnippets",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "char",
+                    "position"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Determines if snippet completions should be prioritized over symbol completions.\nSnippets are prioritized when the user is likely starting a new statement.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The character that was just typed",
+                "name": "char"
+            },
+            {
+                "type": {
+                    "names": [
+                        "Object"
+                    ]
+                },
+                "description": "Current cursor position",
+                "name": "position"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "boolean"
+                    ]
+                },
+                "description": "True if snippets should be prioritized"
+            }
+        ],
+        "name": "shouldPrioritizeSnippets",
+        "longname": "CodeEdytor#shouldPrioritizeSnippets",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                20488,
+                20569
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 547,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001306",
+                "name": "textIndex",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "textIndex",
+        "longname": "<anonymous>~textIndex",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                20618,
+                20656
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 549,
+            "columnno": 18,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001327",
+                "name": "prevChar",
+                "type": "MemberExpression",
+                "value": "this.content[undefined]"
+            }
+        },
+        "undocumented": true,
+        "name": "prevChar",
+        "longname": "<anonymous>~prevChar",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "/**\n     * Provides symbol-based autocompletion including keywords, identifiers, variables, and functions.\n     * \n     * @param {string} prefix - The text prefix to match against\n     * @param {Tree} tree - Current syntax tree for identifier extraction\n     * @param {number} cursorIndex - Current cursor position in text\n     * @returns {Array<Object>} Array of completion objects with label and kind properties\n     */",
+        "meta": {
+            "range": [
+                21267,
+                22290
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 565,
+            "columnno": 4,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001344",
+                "name": "CodeEdytor#completeSymbol",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "prefix",
+                    "tree",
+                    "cursorIndex"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Provides symbol-based autocompletion including keywords, identifiers, variables, and functions.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "description": "The text prefix to match against",
+                "name": "prefix"
+            },
+            {
+                "type": {
+                    "names": [
+                        "Tree"
+                    ]
+                },
+                "description": "Current syntax tree for identifier extraction",
+                "name": "tree"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "description": "Current cursor position in text",
+                "name": "cursorIndex"
+            }
+        ],
+        "returns": [
+            {
+                "type": {
+                    "names": [
+                        "Array.<Object>"
+                    ]
+                },
+                "description": "Array of completion objects with label and kind properties"
+            }
+        ],
+        "name": "completeSymbol",
+        "longname": "CodeEdytor#completeSymbol",
+        "kind": "function",
+        "memberof": "CodeEdytor",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21325,
+                21341
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 566,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001352",
+                "name": "seen",
+                "type": "NewExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "seen",
+        "longname": "<anonymous>~seen",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21357,
+                21439
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 567,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001357",
+                "name": "add",
+                "type": "ArrowFunctionExpression"
+            }
+        },
+        "undocumented": true,
+        "name": "add",
+        "longname": "<anonymous>~add",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21426,
+                21431
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 567,
+            "columnno": 83,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001378",
+                "name": "label",
+                "type": "Identifier",
+                "value": "label"
+            }
+        },
+        "undocumented": true,
+        "name": "label",
+        "longname": "label",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21433,
+                21437
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 567,
+            "columnno": 90,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001380",
+                "name": "kind",
+                "type": "Identifier",
+                "value": "kind"
+            }
+        },
+        "undocumented": true,
+        "name": "kind",
+        "longname": "kind",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21456,
+                21472
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 569,
+            "columnno": 14,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001383",
+                "name": "suggestions",
+                "type": "ArrayExpression",
+                "value": "[]"
+            }
+        },
+        "undocumented": true,
+        "name": "suggestions",
+        "longname": "<anonymous>~suggestions",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21527,
+                21529
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 572,
+            "columnno": 19,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001388",
+                "name": "kw"
+            }
+        },
+        "undocumented": true,
+        "name": "kw",
+        "longname": "<anonymous>~kw",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21711,
+                21713
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 577,
+            "columnno": 19,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001412",
+                "name": "id"
+            }
+        },
+        "undocumented": true,
+        "name": "id",
+        "longname": "<anonymous>~id",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                21921,
+                21929
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 582,
+            "columnno": 19,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001438",
+                "name": "variable"
+            }
+        },
+        "undocumented": true,
+        "name": "variable",
+        "longname": "<anonymous>~variable",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                22113,
+                22117
+            ],
+            "filename": "code_edytor.js",
+            "lineno": 587,
+            "columnno": 19,
+            "path": "/Users/erikor/code-edytor/src/lib/classes",
+            "code": {
+                "id": "astnode100001461",
+                "name": "name"
+            }
+        },
+        "undocumented": true,
+        "name": "name",
+        "longname": "<anonymous>~name",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "kind": "package",
+        "longname": "package:undefined",
+        "files": [
+            "/Users/erikor/code-edytor/src/lib/classes/code_edytor.js"
+        ]
+    }
+]
