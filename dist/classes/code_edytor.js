@@ -374,7 +374,6 @@ export class CodeEdytor {
         // Basic trigger for letters and dots
         const basicTrigger = /[a-zA-Z\.]/.test(char);
         const spaceSnippetTrigger = char === ' ' && this.snippets.size > 0;
-        
         if (basicTrigger || spaceSnippetTrigger) {
             // Use different prefix methods for different triggers
             let prefix;
@@ -393,9 +392,11 @@ export class CodeEdytor {
             
             // For regular snippets, require minimum length of 2 characters
             // This prevents "i " from triggering "if", "r " from triggering "repeat", etc.
-            if (prefix.length >= 2) {
+            if (prefix.length >= 2 && !basicTrigger) {
                 const hasSnippets = this.hasMatchingSnippets(prefix);
                 return hasSnippets;
+            } else {
+                return true;
             }
         }
         
