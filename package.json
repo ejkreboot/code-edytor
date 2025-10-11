@@ -1,6 +1,9 @@
 {
 	"name": "code-edytor",
-	"version": "0.0.6",
+	"version": "0.0.1",
+	"description": "A basic Svelte code editor component with Tree-sitter syntax highlighting, intelligent autocompletion, and multi-language support for R, Python, and JavaScript (or bring your own language!)",
+	"author": "Eric J. Kort",
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
