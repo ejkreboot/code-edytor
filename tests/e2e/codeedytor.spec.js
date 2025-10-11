@@ -56,10 +56,14 @@ test.describe('CodeEdytor Component', () => {
 
   test('should exhibit two way data binding ', async ({ page }) => {
     await page.goto('http://localhost:5173/');
-    await page.getByRole('button', { name: 'Update Editor' }).click();
-    await expect(page.getByRole('textbox', { name: 'Code editor' }).nth(2)).toHaveValue('# Example external update\nimport numpy as np\nresults = np.array([1, 2, 3, 4, 5])\nprint(results.mean())');
-    await page.getByRole('textbox', { name: 'Code editor' }).nth(2).click();
-    await page.getByRole('textbox', { name: 'Code editor' }).nth(2).fill('# Hello from playwright');
-    await expect(page.locator('body')).toContainText('# Hello from playwright');
+    await page.getByRole('textbox', { name: 'Bound Input (try editing here' }).click();
+    await page.getByRole('textbox', { name: 'Bound Input (try editing here' }).click();
+    await page.getByRole('textbox', { name: 'Bound Input (try editing here' }).click();
+    await page.getByRole('textbox', { name: 'Bound Input (try editing here' }).press('ControlOrMeta+a');
+    await page.getByRole('textbox', { name: 'Bound Input (try editing here' }).fill('Testing ');
+    await expect(page.getByRole('textbox', { name: 'Code editor' }).nth(3)).toHaveValue('Testing ');
+    await page.getByRole('textbox', { name: 'Code editor' }).nth(3).click();
+    await page.getByRole('textbox', { name: 'Code editor' }).nth(3).fill('Testing 123');
+    await expect(page.getByRole('textbox', { name: 'Bound Input (try editing here' })).toHaveValue('Testing 123');
   });
 });

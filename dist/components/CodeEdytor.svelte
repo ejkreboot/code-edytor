@@ -519,6 +519,7 @@
     
     .line-numbers-gutter {
         width: 50px;
+        color: #dde5eb
         background: #f8f9fa;
         border-right: 1px solid #e9ecef;
         font-size: 14px;
@@ -529,7 +530,6 @@
         overflow: hidden;
         user-select: none;
         text-align: right;
-        color: #6c757d;
     }
     
     .code-content-area {
@@ -614,7 +614,7 @@
     :global(.line-number) {
         height: 21px; /* Match line-height * font-size */
         font-size: 12px;
-        color: #adb5bd;
+        color: #d5dfe8;
         padding-right: 8px;
     }
     

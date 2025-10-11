@@ -1,6 +1,3 @@
-Need to install the following packages:
-jsdoc@4.0.5
-Ok to proceed? (y) 
 [
     {
         "comment": "/**\n * Base class for language-specific code editors with syntax highlighting, \n * autocompletion, and snippet support using Tree-sitter parsers.\n * \n * This class provides the foundation for creating code editors for different\n * programming languages. It handles:\n * - Tree-sitter parser integration for syntax analysis\n * - Snippet management and completion\n * - Symbol-based autocompletion (keywords, variables, functions)\n * - Text manipulation and cursor position tracking\n * - Variable namespace integration for live completion\n * \n * @abstract\n * @example\n * // Extend this class for specific languages\n * class PythonCodeEdytor extends CodeEdytor {\n *   constructor() {\n *     super('python');\n *   }\n *   \n *   async makeParser() {\n *     // Implementation specific to Python\n *   }\n * }\n */",

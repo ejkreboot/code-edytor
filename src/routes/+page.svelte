@@ -59,8 +59,10 @@
 
 
 <h2>Python Code Edytor</h2>
+With max height set to 300px
 <CodeEdytor editorClass={PythonCodeEdytor} 
             maxWidth="800px"
+            maxHeight="300px"
             availableVariables={['dogs', 'cats', 'parks', 'precipitation']} 
             initialCode={`if dogs == 5:\n\tprint(dogs)`} />
 

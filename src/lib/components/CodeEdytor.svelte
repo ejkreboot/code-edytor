@@ -39,15 +39,17 @@
     // svelte-ignore export_let_unused
     export let width = "100%";
     // svelte-ignore export_let_unused
-    export let height = "200px";
+    export let height = "auto";
     // svelte-ignore export_let_unused
     export let minHeight = "200px";
     // svelte-ignore export_let_unused
-    export let maxHeight = "200px";
+    export let maxHeight = null;
     // svelte-ignore export_let_unused
     export let maxWidth = "100%";
     // svelte-ignore export_let_unused
     export let minWidth = "300px";
+    // svelte-ignore export_let_unused
+    export let autoExpand = true;
     // svelte-ignore export_let_unused
     export let fontFamily = 'Monaspace Neon VF';
     
@@ -78,6 +80,23 @@
     let previewPosition = -1;
     let isPreviewActive = false;
     
+    /**
+     * Updates the preview state and triggers auto-resize if needed
+     */
+    function updatePreviewState(active, text = "", position = -1) {
+        const hadActivePreview = isPreviewActive;
+        const hadPreviewText = previewText;
+        
+        isPreviewActive = active;
+        previewText = text;
+        previewPosition = position;
+        
+        // Trigger resize if preview state changed and auto-expand is enabled
+        if (autoExpand && (hadActivePreview !== active || hadPreviewText !== text)) {
+            setTimeout(() => syncLayerHeights(), 0);
+        }
+    }
+    
     $: styledContent = generateStyledContent(code, completions, isPreviewActive, cursorPosition, completionIndex);
     $: lineNumbers = generateLineNumbers(code);
     $: if (underlayElement && (styledContent || styledContent === "")) {
@@ -89,6 +108,8 @@
     $: if (editor && availableVariables) {
         editor.setAvailableVariables(availableVariables);
     }
+    
+
 
     
     // Force underlay update in case Svelte reactivity lags (e.g., after select-all delete)
@@ -213,7 +234,7 @@
         if (!editorClass) {
             throw new Error('CodeEdytor: editorClass prop is required');
         }
-        
+        console.log("Max height:", maxHeight);
         editor = new editorClass();
         await editor.init();
         
@@ -227,13 +248,57 @@
             codeEditor.value = code;
             editor.onInput(code);
         }
+        
+        // Sync layer heights if enabled
+        if (autoExpand) {
+            syncLayerHeights();
+        }
     });
+    
+    /**
+     * Synchronizes the heights of overlay and underlay to match content exactly
+     */
+    function syncLayerHeights() {
+        if (!codeEditor || !underlayElement || !autoExpand) return;
+        
+        // Reset textarea height to auto to get natural content height
+        codeEditor.style.height = 'auto';
+        
+        // Get the natural height the textarea wants to be
+        let naturalHeight = codeEditor.scrollHeight;
+        
+        // If ghost text is active, also consider the underlay's content height
+        if (isPreviewActive && previewText) {
+            // Temporarily set underlay to auto height to measure its natural height
+            const originalUnderlayHeight = underlayElement.style.height;
+            underlayElement.style.height = 'auto';
+            const underlayHeight = underlayElement.scrollHeight;
+            underlayElement.style.height = originalUnderlayHeight;
+            
+            // Use the larger of the two heights to accommodate ghost text
+            naturalHeight = Math.max(naturalHeight, underlayHeight);
+        }
+        
+        // Apply minimum height constraint
+        const minHeightPx = parseInt(minHeight);
+        const finalHeight = Math.max(naturalHeight, minHeightPx);
+        
+        // Set all layers to the exact same height
+        codeEditor.style.height = `${finalHeight}px`;
+        underlayElement.style.height = `${finalHeight}px`;
+        
+        if (lineNumbersElement) {
+            lineNumbersElement.style.height = `${finalHeight}px`;
+        }
+        
+        // Force both layers to have the same line-height and ensure no scrollbars
+        codeEditor.style.overflowY = 'hidden';
+        underlayElement.style.overflowY = 'hidden';
+    }
     
     async function handleInput(event) {
         completionIndex = 0;
-        isPreviewActive = false;
-        previewText = "";
-        previewPosition = -1;
+        updatePreviewState(false, "", -1);
         
         code = event.target.value;
         const textIndex = getCursorPosition(); 
@@ -260,29 +325,70 @@
                 completions = await editor.getTrimmedCompletions(cursorPosition, prioritizeSnippets);
                 
                 if (completions.length > 0) {
-                    isPreviewActive = true;
-                    previewText = completions[0].label; // Always show first completion as ghost text
+                    updatePreviewState(true, completions[0].label); // Always show first completion as ghost text
                     // No dropdown needed - just ghost text cycling
                 } else {
-                    isPreviewActive = false;
-                    previewText = "";
+                    updatePreviewState(false, "");
                 }                
             } catch (error) {
                 completions = [];
-                isPreviewActive = false;
-                previewText = "";
+                updatePreviewState(false, "");
             }
         } else {
             completions = [];
-            isPreviewActive = false;
-            previewText = "";
+            updatePreviewState(false, "");
         }
         
         if (oninput && typeof oninput === 'function') {
             oninput(event);
         }
         
+        // Sync layer heights if enabled
+        if (autoExpand) {
+            syncLayerHeights();
+        }
+        
         dispatchValue(code);
+    }
+    
+    /**
+     * Handles paste events to ensure proper auto-resize and synchronization
+     */
+    function handlePaste(event) {
+        // Let the paste complete, then trigger resize and update
+        setTimeout(() => {
+            // Update the code variable with the new textarea content
+            code = codeEditor.value;
+            
+            // Update cursor position
+            const textIndex = getCursorPosition();
+            cursorPosition = editor ? editor.textIndexToPosition(code, textIndex) : { row: 0, column: 0 };
+            
+            // Update the editor
+            editor.onInput(code);
+            editor.cursor = cursorPosition;
+            
+            // Clear any active completions since content changed significantly
+            completions = [];
+            updatePreviewState(false, "");
+            completionIndex = 0;
+            
+            // Trigger auto-resize if enabled
+            if (autoExpand) {
+                syncLayerHeights();
+            }
+            
+            // Trigger callbacks
+            if (oninput && typeof oninput === 'function') {
+                const syntheticEvent = {
+                    target: { value: code },
+                    type: 'paste'
+                };
+                oninput(syntheticEvent);
+            }
+            
+            dispatchValue(code);
+        }, 0);
     }
 
     function getTextContent() {
@@ -336,8 +442,7 @@
         if (event.key === 'Escape') {
             event.preventDefault();
             completions = [];
-            isPreviewActive = false;
-            previewText = "";
+            updatePreviewState(false, "");
             completionIndex = 0;
             return;
         }
@@ -349,6 +454,11 @@
                 completionIndex = (completionIndex + 1) % completions.length;
             } else if (event.key === 'ArrowUp') {
                 completionIndex = (completionIndex - 1 + completions.length) % completions.length;
+            }
+            
+            // Update preview text to show the selected completion
+            if (completions[completionIndex]) {
+                updatePreviewState(true, completions[completionIndex].label);
             }
             
             return;
@@ -389,6 +499,11 @@
         }, 0);
         
         editor.onInput(newCode);
+        
+        // Auto-resize if enabled
+        if (autoExpand) {
+            setTimeout(() => syncLayerHeights(), 0);
+        }
     }
     
     
@@ -430,6 +545,11 @@
         editor.onInput(newCode);
         updateCursorPosition();
         
+        // Auto-resize if enabled
+        if (autoExpand) {
+            setTimeout(() => syncLayerHeights(), 0);
+        }
+        
         completions = [];
         completionIndex = 0;
         isPreviewActive = false;
@@ -465,10 +585,10 @@
 <div 
     class="code-editor-container"
     style="width: {width}; 
-           height: {height}; 
-           min-height: {minHeight}; 
-           max-height: {maxHeight}; 
-           max-width: {maxWidth}; 
+           min-height: {minHeight ? minHeight : '200px'}; 
+           max-height: {maxHeight ? maxHeight : 'none'};
+           max-width: {maxWidth};
+           overflow: scroll; 
            min-width: {minWidth};
            font-family: {fontFamily};">
     <!-- Line numbers gutter -->
@@ -492,6 +612,7 @@
             bind:this={codeEditor}
             value={code}
             on:input={handleInput}
+            on:paste={handlePaste}
             on:keydown={handleKeydown}
             on:click={updateCursorPosition}
             on:scroll={handleScroll}
@@ -517,9 +638,10 @@
         display: flex;
     }
     
+    
     .line-numbers-gutter {
         width: 50px;
-        background: #f8f9fa;
+        background: #fafafa;
         border-right: 1px solid #e9ecef;
         font-size: 14px;
         line-height: 1.5;
@@ -529,7 +651,7 @@
         overflow: hidden;
         user-select: none;
         text-align: right;
-        color: #6c757d;
+        color: #dae5ef;
     }
     
     .code-content-area {
@@ -580,6 +702,7 @@
         tab-size: 4;
         -moz-tab-size: 4;
     }
+    
     
     .code-overlay::placeholder {
         color: rgba(153, 153, 153, 0.5);

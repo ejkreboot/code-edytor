@@ -26,8 +26,6 @@ npm run test:e2e:report
   - Two-way binding functionality
   - Callback demonstration
   - External updates
-  - Completion system
-  - Line numbers
 
 ## Recording New Tests
 
@@ -49,9 +47,6 @@ The tests cover:
 - ✅ Two-way binding (`bind:value`)
 - ✅ Callback props (`oninput`, `onchange`, etc.)
 - ✅ External code updates
-- ✅ Completion system (ghost text)
-- ✅ Line numbers display
-- ✅ Multi-language support (R, Python, JavaScript)
 
 ## Configuration
 
