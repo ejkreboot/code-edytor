@@ -45,12 +45,24 @@ export class RCodeEdytor extends CodeEdytor {
     }
 
     collectIdentifiers(tree, cursorIndex) {
+        console.log("Collecting R identifiers from syntax tree...");
         const identifiers = new Set();
         
         if (!tree) return identifiers;
         
         function walk(node) {
+            // Debug: Log different node types to understand Tree-sitter R parsing
+            if (node.text && node.text.includes('.') && node.text.length < 50) {
+                console.log(`R Tree-sitter node: type="${node.type}", text="${node.text}"`);
+            }
+            
             if (node.type === 'identifier') {
+                identifiers.add(node.text);
+            }
+            
+            // R-specific: handle dot notation (e.g., lm.model, data.frame)
+            // Look for namespace access or member expressions
+            if (node.type === 'namespace' || node.type === 'extract' || node.type === 'subset') {
                 identifiers.add(node.text);
             }
             

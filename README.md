@@ -1,4 +1,4 @@
-# CodeEdytor 🚀
+# CodeEdytor 
 
 A simple, lightish weight, language-agnostic code editor component for Svelte with basic code completion, snippets, and syntax highlighting,
 
