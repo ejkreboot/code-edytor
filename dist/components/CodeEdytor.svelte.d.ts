@@ -11,9 +11,10 @@ type CodeEdytor = SvelteComponent<{
     width?: string;
     height?: string;
     minHeight?: string;
-    maxHeight?: string;
+    maxHeight?: any;
     maxWidth?: string;
     minWidth?: string;
+    autoExpand?: boolean;
     fontFamily?: string;
     updateCode?: (newCode: any, preserveCursor?: boolean) => void;
     getCode?: () => string;
@@ -37,9 +38,10 @@ declare const CodeEdytor: $$__sveltets_2_IsomorphicComponent<{
     width?: string;
     height?: string;
     minHeight?: string;
-    maxHeight?: string;
+    maxHeight?: any;
     maxWidth?: string;
     minWidth?: string;
+    autoExpand?: boolean;
     fontFamily?: string;
     updateCode?: (newCode: any, preserveCursor?: boolean) => void;
     getCode?: () => string;
