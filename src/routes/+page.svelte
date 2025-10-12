@@ -54,6 +54,7 @@
 <h2>R Code Edytor</h2>
 <CodeEdytor editorClass={RCodeEdytor} 
             maxWidth="800px"
+            maxHeight="300px"
             availableVariables={['df', 'trees', 'flowers', 'traffic']} 
             initialCode={`if (length(trees) > 5)) {\n	# code\n} else {\n	# else code\n}`} />
 
