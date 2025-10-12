@@ -588,7 +588,7 @@
            min-height: {minHeight ? minHeight : '200px'}; 
            max-height: {maxHeight ? maxHeight : 'none'};
            max-width: {maxWidth};
-           overflow: scroll; 
+           overflow: auto; 
            min-width: {minWidth};
            font-family: {fontFamily};">
     <!-- Line numbers gutter -->
@@ -638,9 +638,9 @@
         display: flex;
     }
     
-    
+
     .line-numbers-gutter {
-        width: 50px;
+        width: 40px;
         background: #fafafa;
         border-right: 1px solid #e9ecef;
         font-size: 14px;
@@ -673,7 +673,7 @@
         z-index: 1;
         overflow-y: auto;
         box-sizing: border-box;
-        background: white;
+        background: rgb(249, 251, 253);
         color: black;
         pointer-events: none;
         tab-size: 4;
