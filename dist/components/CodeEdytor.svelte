@@ -234,7 +234,6 @@
         if (!editorClass) {
             throw new Error('CodeEdytor: editorClass prop is required');
         }
-        console.log("Max height:", maxHeight);
         editor = new editorClass();
         await editor.init();
         
