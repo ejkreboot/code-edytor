@@ -700,6 +700,7 @@
         caret-color: #007acc;
         tab-size: 4;
         -moz-tab-size: 4;
+        font-family: inherit;
     }
     
     
